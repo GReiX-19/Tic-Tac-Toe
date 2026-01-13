@@ -8,8 +8,6 @@
 *.suo
 *.user
 *.userosscache
-*.sln
-*.vcxproj
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -362,3 +360,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Tic-Tac-Toe.sln
+/modules/EngineCore/EngineCore.vcxproj
+/modules/EngineCore/EngineCore.vcxproj.filters
+/modules/GameApp/GameApp.vcxproj
+/modules/GameApp/GameApp.vcxproj.filters
+/modules/Renderer/Renderer.vcxproj
+/modules/Renderer/Renderer.vcxproj.filters
