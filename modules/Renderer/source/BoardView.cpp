@@ -38,8 +38,8 @@ namespace Renderer {
 			for (int col = 0; col < 3; col++) {
 				auto cell = board.get_CellState(row, col);
 
-				float x = col * m_cellSize;
-				float y = row * m_cellSize;
+				float x = row * m_cellSize;
+				float y = col * m_cellSize;
 
 				if (cell == EngineCore::CellState::X) {
 					sf::RectangleShape line1({ m_cellSize - 40.f, 10.f });
@@ -61,11 +61,13 @@ namespace Renderer {
 					_window.draw(line2);
 				}
 				else if (cell == EngineCore::CellState::O) {
-					sf::CircleShape circle(m_cellSize / 2.f - 20.f);
+					sf::CircleShape circle(m_cellSize / 2.5f);
 					circle.setFillColor(sf::Color::Transparent);
 					circle.setOutlineColor(sf::Color::Blue);
 					circle.setOutlineThickness(10.f);
-					circle.setPosition({ x + 20.f, y + 20.f });
+
+					circle.setOrigin({ circle.getRadius(), circle.getRadius()});
+					circle.setPosition({ x + m_cellSize / 2.f, y + m_cellSize / 2.f });
 					_window.draw(circle);
 				}
 			}
