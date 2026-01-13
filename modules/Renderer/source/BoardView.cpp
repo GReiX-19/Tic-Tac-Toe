@@ -16,7 +16,7 @@ namespace Renderer {
 
 	void BoardView::draw_grid(sf::RenderWindow& _window) {
 		sf::RectangleShape line;
-		line.setFillColor(sf::Color::Black);
+		line.setFillColor(sf::Color::Yellow);
 		// Vertical lines
 		for (int i = 1; i <= 3; i++) {
 			line.setSize(sf::Vector2f(5.f, 600.f));
@@ -48,10 +48,13 @@ namespace Renderer {
 					line1.setFillColor(sf::Color::Red);
 					line2.setFillColor(sf::Color::Red);
 
-					line1.setPosition({ x + 20.f, y + m_cellSize / 2.f });
+					line1.setOrigin({ line1.getSize().x / 2.f, line1.getSize().y / 2.f });
+					line2.setOrigin({ line1.getSize().x / 2.f, line1.getSize().y / 2.f });
+
+					line1.setPosition({ x + m_cellSize / 2.f, y + m_cellSize / 2.f });
 					line1.setRotation(sf::degrees(45));
 
-					line2.setPosition({ x + 20.f, y + m_cellSize / 2.f });
+					line2.setPosition({ x + m_cellSize / 2.f, y + m_cellSize / 2.f });
 					line2.setRotation(sf::degrees(-45));
 
 					_window.draw(line1);

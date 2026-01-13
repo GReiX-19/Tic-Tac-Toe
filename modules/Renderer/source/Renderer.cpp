@@ -25,9 +25,9 @@ namespace Renderer {
 				m_window.close();
 			}
 
-			if (const auto* mouseButton = event->getIf<sf::Event::MouseButtonPressed>()) {
-				if (mouseButton->button == sf::Mouse::Button::Left) {
-					const sf::Vector2i mousePos = { mouseButton->position.x, mouseButton->position.y };
+			if (const auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
+				if (mouse->button == sf::Mouse::Button::Left) {
+					const sf::Vector2i mousePos = { mouse->position.x, mouse->position.y };
 					const sf::Vector2i gridPos = { mousePos.x / 200, mousePos.y / 200 };
 					
 					m_gameState.make_move(gridPos.x, gridPos.y);
