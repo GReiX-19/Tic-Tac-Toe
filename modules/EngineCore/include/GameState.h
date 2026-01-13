@@ -8,7 +8,7 @@ namespace EngineCore {
 		
 		GameState();
 
-		bool make_move(int _row, int _col, Player _player);
+		bool make_move(int _row, int _col);
 		bool is_win(Player _player) const;
 		bool is_draw() const;
 

@@ -5,10 +5,10 @@ namespace EngineCore {
 		: m_board(), m_current_player(Player::PLAYER_X) {
 	}
 
-	bool GameState::make_move(int _row, int _col, Player _player) {
-		CellState state = (_player == Player::PLAYER_X) ? CellState::X : CellState::O;
+	bool GameState::make_move(int _row, int _col) {
+		CellState state = (m_current_player == Player::PLAYER_X) ? CellState::X : CellState::O;
 		if (m_board.set_CellState(_row, _col, state)) {
-			m_current_player = (_player == Player::PLAYER_X) ? Player::PLAYER_O : Player::PLAYER_X;
+			m_current_player = (m_current_player == Player::PLAYER_X) ? Player::PLAYER_O : Player::PLAYER_X;
 			return true;
 		}
 		return false;
