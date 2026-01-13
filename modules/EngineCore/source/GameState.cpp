@@ -7,7 +7,7 @@ namespace EngineCore {
 
 	bool GameState::make_move(int _row, int _col, Player _player) {
 		CellState state = (_player == Player::PLAYER_X) ? CellState::X : CellState::O;
-		if (m_board.set_cell(_row, _col, state)) {
+		if (m_board.set_CellState(_row, _col, state)) {
 			m_current_player = (_player == Player::PLAYER_X) ? Player::PLAYER_O : Player::PLAYER_X;
 			return true;
 		}
@@ -22,14 +22,14 @@ namespace EngineCore {
 	bool GameState::check_win_for(CellState _state) const {
 		// Check rows and columns
 		for (int i = 0; i < 3; ++i) {
-			if ((m_board.get_cell(i, 0) == _state && m_board.get_cell(i, 1) == _state && m_board.get_cell(i, 2) == _state) ||
-				(m_board.get_cell(0, i) == _state && m_board.get_cell(1, i) == _state && m_board.get_cell(2, i) == _state)) {
+			if ((m_board.get_CellState(i, 0) == _state && m_board.get_CellState(i, 1) == _state && m_board.get_CellState(i, 2) == _state) ||
+				(m_board.get_CellState(0, i) == _state && m_board.get_CellState(1, i) == _state && m_board.get_CellState(2, i) == _state)) {
 				return true;
 			}
 		}
 		// Check diagonals
-		if ((m_board.get_cell(0, 0) == _state && m_board.get_cell(1, 1) == _state && m_board.get_cell(2, 2) == _state) ||
-			(m_board.get_cell(0, 2) == _state && m_board.get_cell(1, 1) == _state && m_board.get_cell(2, 0) == _state)) {
+		if ((m_board.get_CellState(0, 0) == _state && m_board.get_CellState(1, 1) == _state && m_board.get_CellState(2, 2) == _state) ||
+			(m_board.get_CellState(0, 2) == _state && m_board.get_CellState(1, 1) == _state && m_board.get_CellState(2, 0) == _state)) {
 			return true;
 		}
 		return false;
