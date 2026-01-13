@@ -16,7 +16,7 @@ namespace Renderer {
 		while (m_window.isOpen()) {
 			processEvents();
 			update();
-			render();
+			render(boardView);
 		}
 	}
 
@@ -25,6 +25,15 @@ namespace Renderer {
 			if (event->is<sf::Event::Closed>()) {
 				m_window.close();
 			}
+
+			if (const auto* mouseButton = event->getIf<sf::Event::MouseButtonPressed>()) {
+				if (mouseButton->button == sf::Mouse::Left) {
+					const sf::Vector2i mousePos = { mouseButton->position.x, mouseButton->position.y };
+					const sf::Vector2i gridPos = { mousePos.x / 200, mousePos.y / 200 };
+					
+					m_gameState.make_move(gridPos.x, gridPos.y);
+				}
+			}
 		}
 	}
 
@@ -32,8 +41,12 @@ namespace Renderer {
 		// Update game state if necessary
 	}
 
-	void Renderer::render() {
-		
+	void Renderer::render(BoardView& _boardView) {
+		m_window.clear(sf::Color::Black);
+
+		_boardView.draw(m_window);
+
+		m_window.display();
 	}
 
 }

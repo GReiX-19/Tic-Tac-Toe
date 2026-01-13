@@ -15,7 +15,7 @@ namespace Renderer {
 
 		void processEvents();
 		void update();
-		void render();
+		void render(BoardView& _boardView);
 
 	private:
 		EngineCore::GameState& m_gameState;
