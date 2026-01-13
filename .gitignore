@@ -367,4 +367,4 @@ FodyWeavers.xsd
 /modules/GameApp/GameApp.vcxproj.filters
 /modules/Renderer/Renderer.vcxproj
 /modules/Renderer/Renderer.vcxproj.filters
-/SFML/lib
+/SFML
