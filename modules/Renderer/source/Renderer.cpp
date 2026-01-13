@@ -34,17 +34,18 @@ namespace Renderer {
 						m_renderState = RenderState::Playing;
 					}
 				}
-				return;
 			}
+			else {
+				if (const auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
+					if (mouse->button == sf::Mouse::Button::Left) {
+						const sf::Vector2i mousePos = { mouse->position.x, mouse->position.y };
+						const sf::Vector2i gridPos = { mousePos.x / 200, mousePos.y / 200 };
 
-			if (const auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
-				if (mouse->button == sf::Mouse::Button::Left) {
-					const sf::Vector2i mousePos = { mouse->position.x, mouse->position.y };
-					const sf::Vector2i gridPos = { mousePos.x / 200, mousePos.y / 200 };
-					
-					m_gameState.make_move(gridPos.x, gridPos.y);
+						m_gameState.make_move(gridPos.x, gridPos.y);
+					}
 				}
 			}
+
 		}
 	}
 
@@ -71,9 +72,9 @@ namespace Renderer {
 		sf::Font font("../../Assets/Tuffy.ttf");
 		sf::Text text(font);
 
-		text.setCharacterSize(50);
+		text.setCharacterSize(70);
 		text.setFillColor(sf::Color::White);
-		text.setPosition({50, 250});
+		text.setPosition({100, 250});
 
 		_boardView.draw(m_window);
 
