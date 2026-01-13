@@ -27,6 +27,15 @@ namespace Renderer {
 				m_window.close();
 			}
 
+			if (m_renderState == RenderState::GameOver) {
+				if (const auto* key = event->getIf<sf::Event::KeyPressed>()) {
+					if (key->scancode == sf::Keyboard::Scan::Enter) {
+						m_gameState.reset();
+						m_renderState = RenderState::Playing;
+					}
+				}
+			}
+
 			if (const auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
 				if (mouse->button == sf::Mouse::Button::Left) {
 					const sf::Vector2i mousePos = { mouse->position.x, mouse->position.y };
@@ -58,7 +67,27 @@ namespace Renderer {
 	void Renderer::render(BoardView& _boardView) {
 		m_window.clear(sf::Color::Black);
 
+		sf::Font font("Tuffy.ttf");
+		sf::Text text(font);
+
+		text.setCharacterSize(50);
+		text.setFillColor(sf::Color::White);
+		text.setPosition({50, 250});
+
 		_boardView.draw(m_window);
+
+		if (m_renderState == RenderState::GameOver) {
+			if (m_winner == EngineCore::Player::PLAYER_X) {
+				text.setString("Player X Wins!");
+			}
+			else if (m_winner == EngineCore::Player::PLAYER_O) {
+				text.setString("Player O Wins!");
+			}
+			else {
+				text.setString("It's a Draw!");
+			}
+			m_window.draw(text);
+		}
 
 		m_window.display();
 	}
