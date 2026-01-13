@@ -1,7 +1,7 @@
 #include "BoardView.h"
-#include "EngineCore/include/GameState.h"
-#include "EngineCore/include/Board.h"
-#include "EngineCore/include/CellState.h"
+#include "GameState.h"
+#include "Board.h"
+#include "CellState.h"
 
 namespace Renderer {
 		

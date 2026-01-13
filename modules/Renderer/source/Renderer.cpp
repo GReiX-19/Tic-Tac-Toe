@@ -1,5 +1,4 @@
 #include "Renderer.h"
-#include "BoardView.h"
 #include <SFML/Window/Event.hpp>
 
 namespace Renderer {
