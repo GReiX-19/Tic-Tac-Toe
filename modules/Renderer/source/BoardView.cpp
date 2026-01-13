@@ -54,8 +54,8 @@ namespace Renderer {
 					line2.setPosition({ x + 20.f, y + m_cellSize / 2.f });
 					line2.setRotation(sf::degrees(-45));
 
-					window.draw(line1);
-					window.draw(line2);
+					_window.draw(line1);
+					_window.draw(line2);
 				}
 				else if (cell == EngineCore::CellState::O) {
 					sf::CircleShape circle(m_cellSize / 2.f - 20.f);
