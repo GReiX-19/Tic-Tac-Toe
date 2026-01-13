@@ -27,7 +27,7 @@ namespace Renderer {
 			}
 
 			if (const auto* mouseButton = event->getIf<sf::Event::MouseButtonPressed>()) {
-				if (mouseButton->button == sf::Mouse::Left) {
+				if (mouseButton->button == sf::Mouse::Button::Left) {
 					const sf::Vector2i mousePos = { mouseButton->position.x, mouseButton->position.y };
 					const sf::Vector2i gridPos = { mousePos.x / 200, mousePos.y / 200 };
 					
