@@ -9,7 +9,8 @@ project "GameApp"
 	includedirs {
 		"include",
 		"../EngineCore/include",
-		"../Renderer/include"
+		"../Renderer/include",
+		"%{wks.location}/SFML/include"
 	}
 
 	links {
@@ -21,7 +22,7 @@ project "GameApp"
 	objdir ("%{wks.location}/bin/intermediates/" .. OutputDir .. "/%{prj.name}")
 
 	postbuildcommands {
-		"{COPYFILE} %[%{wks.location}/SFML/dll/*.dll] %[%{wks.location}/bin/%{cfg.buildcfg}/%{prj.name}]"
+		"{COPYFILE} %[%{wks.location}/SFML/dll/*.dll] %[%{wks.location}/bin/%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}/%{prj.name}]"
 	}
 
 	filter "configurations:Debug"
