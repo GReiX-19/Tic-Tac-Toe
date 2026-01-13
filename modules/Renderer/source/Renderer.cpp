@@ -5,7 +5,9 @@ namespace Renderer {
 
 	Renderer::Renderer(EngineCore::GameState& _gameState)
 		: m_gameState(_gameState)
-		, m_window(sf::VideoMode({ 600, 600 }), "Tic Tac Toe") {
+		, m_window(sf::VideoMode({ 600, 600 }), "Tic Tac Toe")
+		, m_renderState(RenderState::Playing)
+		, m_winner() {
 		m_window.setFramerateLimit(60);
 	}
 
@@ -37,7 +39,20 @@ namespace Renderer {
 	}
 
 	void Renderer::update() {
-		// Update game state if necessary
+		if (m_renderState == RenderState::GameOver) {
+			return;
+		}
+		if (m_gameState.is_win(EngineCore::Player::PLAYER_X)) {
+			m_renderState = RenderState::GameOver;
+			m_winner = EngineCore::Player::PLAYER_X;
+		}
+		else if (m_gameState.is_win(EngineCore::Player::PLAYER_O)) {
+			m_renderState = RenderState::GameOver;
+			m_winner = EngineCore::Player::PLAYER_O;
+		}
+		else if (m_gameState.is_draw()) {
+			m_renderState = RenderState::GameOver;
+		}
 	}
 
 	void Renderer::render(BoardView& _boardView) {
