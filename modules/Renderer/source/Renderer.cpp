@@ -69,7 +69,7 @@ namespace Renderer {
 	void Renderer::render(BoardView& _boardView) {
 		m_window.clear(sf::Color::Black);
 
-		sf::Font font("../../Assets/Tuffy.ttf");
+		sf::Font font("Assets/Tuffy.ttf");
 		sf::Text text(font);
 
 		text.setCharacterSize(70);

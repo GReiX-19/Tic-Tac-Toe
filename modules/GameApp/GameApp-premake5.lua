@@ -22,7 +22,8 @@ project "GameApp"
 	objdir ("%{wks.location}/bin/intermediates/" .. OutputDir .. "/%{prj.name}")
 
 	postbuildcommands {
-		"{COPYFILE} %[%{wks.location}/SFML/dll/*.dll] %[%{wks.location}/bin/%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}/%{prj.name}]"
+		"{COPYFILE} %[%{wks.location}/SFML/dll/*.dll] %[%{wks.location}/bin/%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}/%{prj.name}]",
+		"{COPYDIR} %[%{wks.location}/Assets] %[%{wks.location}/bin/%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}/%{prj.name}/Assets]"
 	}
 
 	filter "configurations:Debug"
