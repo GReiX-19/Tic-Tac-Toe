@@ -1,7 +1,7 @@
 #pragma once
+#include <GameState.h>
+#include "BoardView.h"
 #include <SFML/Graphics.hpp>
-
-namespace EngineCore { class GameState; }
 
 namespace Renderer {
 	class Renderer {

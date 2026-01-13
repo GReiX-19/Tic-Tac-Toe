@@ -18,5 +18,5 @@ namespace Renderer {
 	private:
 		const EngineCore::GameState& m_gameState;
 		float m_cellSize;
-	}
+	};
 }
