@@ -34,6 +34,7 @@ namespace Renderer {
 						m_renderState = RenderState::Playing;
 					}
 				}
+				return;
 			}
 
 			if (const auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
@@ -67,7 +68,7 @@ namespace Renderer {
 	void Renderer::render(BoardView& _boardView) {
 		m_window.clear(sf::Color::Black);
 
-		sf::Font font("Tuffy.ttf");
+		sf::Font font("../../Assets/Tuffy.ttf");
 		sf::Text text(font);
 
 		text.setCharacterSize(50);
