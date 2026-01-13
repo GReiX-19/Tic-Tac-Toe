@@ -1,6 +1,7 @@
 #pragma once
 #include <GameState.h>
 #include "BoardView.h"
+#include "RenderState.h"
 #include <SFML/Graphics.hpp>
 
 namespace Renderer {
@@ -20,5 +21,8 @@ namespace Renderer {
 	private:
 		EngineCore::GameState& m_gameState;
 		sf::RenderWindow m_window;
+
+		RenderState m_renderState;
+		EngineCore::Player m_winner;
 	};
 }
