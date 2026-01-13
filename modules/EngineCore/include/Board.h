@@ -5,19 +5,22 @@
 namespace EngineCore {
 	class Board {
 	public:
-		
+
 		static constexpr int SIZE = 3;
 
 	public:
 
 		Board();
 
-		CellState get_CellState(int row, int col) const;
+		CellState get_CellState(int _row, int _col) const;
 
-		bool set_CellState(int row, int col, CellState state);
+		bool set_CellState(int _row, int _col, CellState _state);
+
+		bool is_full() const;
 
 		void reset();
 
 	private:
 		std::array<std::array<CellState, SIZE>, SIZE> m_cells;
 	};
+}
