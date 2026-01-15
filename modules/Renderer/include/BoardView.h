@@ -13,9 +13,10 @@ namespace Renderer {
 		void draw_board(sf::RenderWindow& _window);
 		void draw_marks(sf::RenderWindow& _window);
 		void draw_win_line(sf::RenderWindow& _window);
-		void highlight_cell(sf::RenderWindow& _window, sf::Vector2i& _mousePosition);
+		void mouseHighlight_cell(sf::RenderWindow& _window, sf::Vector2i& _mousePosition);
+		void keyboardHighlight_cell(sf::RenderWindow& _window, sf::Vector2i& _keyboardCursorPos);
 
-		void draw(sf::RenderWindow& _window, sf::Vector2i& _mousePosition);
+		void draw(sf::RenderWindow& _window, sf::Vector2i& _mousePosition, sf::Vector2i& _keyboardCursorPos, bool& _isUsingKeyboard);
 
 	private:
 		const EngineCore::GameState& m_gameState;

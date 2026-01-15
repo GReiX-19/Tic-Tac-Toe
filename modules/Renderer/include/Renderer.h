@@ -31,5 +31,7 @@ namespace Renderer {
 		TextRenderer m_textRenderer;
 
 		sf::Vector2i m_mousePosition;
+		sf::Vector2i m_keyboardCursorPos;
+		bool m_isUsingKeyboard = false;
 	};
 }
