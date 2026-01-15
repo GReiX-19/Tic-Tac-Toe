@@ -3,6 +3,7 @@
 #include "BoardView.h"
 #include "RenderState.h"
 #include "AssetsManager.h"
+#include "TextRenderer.h"
 #include <SFML/Graphics.hpp>
 
 namespace Renderer {
@@ -27,5 +28,6 @@ namespace Renderer {
 		EngineCore::Player m_winner;
 
 		AssetsManager m_assetsManager;
+		TextRenderer m_textRenderer;
 	};
 }
