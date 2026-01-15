@@ -79,14 +79,14 @@ namespace Renderer {
 		_boardView.draw(m_window);
 
 		if (m_renderState == RenderState::GameOver) {
-			if (m_winner == EngineCore::Player::PLAYER_X) {
+			if (m_gameState.is_draw()) {
+				text.setString("It's a Draw!");
+			}
+			else if (m_winner == EngineCore::Player::PLAYER_X) {
 				text.setString("Player X Wins!");
 			}
 			else if (m_winner == EngineCore::Player::PLAYER_O) {
 				text.setString("Player O Wins!");
-			}
-			else {
-				text.setString("It's a Draw!");
 			}
 			m_window.draw(text);
 		}
