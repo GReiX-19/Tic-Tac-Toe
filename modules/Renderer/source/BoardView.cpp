@@ -62,4 +62,31 @@ namespace Renderer {
 
 		_window.draw(line);
 	}
+
+	void BoardView::highlight_cell(sf::RenderWindow& _window, sf::Vector2i& _mousePosition) {
+		if (_mousePosition.x < 0 or _mousePosition.x >= 600
+			or _mousePosition.y < 0 or _mousePosition.y >= 600) {
+			return;
+		}
+
+		int col = _mousePosition.x / static_cast<int>(m_cellSize);
+		int row = _mousePosition.y / static_cast<int>(m_cellSize);
+
+		if (m_gameState.get_board().get_CellState(row, col) != EngineCore::CellState::EMPTY) {
+			return;
+		}
+
+		sf::RectangleShape highlightRect({ m_cellSize, m_cellSize });
+		highlightRect.setPosition({ col * m_cellSize, row * m_cellSize });
+		highlightRect.setFillColor(sf::Color(255, 255, 0, 100));
+
+		_window.draw(highlightRect);
+	}
+
+	void BoardView::draw(sf::RenderWindow& _window, sf::Vector2i& _mousePosition) {
+		draw_board(_window);
+		draw_marks(_window);
+		highlight_cell(_window, _mousePosition);
+		draw_win_line(_window);
+	}
 }
