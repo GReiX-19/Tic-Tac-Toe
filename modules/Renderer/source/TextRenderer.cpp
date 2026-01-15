@@ -9,6 +9,8 @@ namespace Renderer {
 		const size_t _charSize, const sf::Color& _color, const float _y) {
 		sf::Text text(m_assetsManager.get_font("mainFont"), sf::String(_text.data()), _charSize);
 		text.setFillColor(_color);
+		text.setOutlineThickness(2.f);
+		text.setOutlineColor(sf::Color::Black);
 
 		sf::FloatRect textBounds = text.getLocalBounds();
 		text.setOrigin({ textBounds.getCenter().x, textBounds.getCenter().y });
