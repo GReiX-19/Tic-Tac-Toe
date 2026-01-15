@@ -16,6 +16,7 @@ namespace Renderer {
 			or !m_assetsManager.load_texture("crossTexture", "Assets/cross.png")) {
 			throw std::runtime_error("Failed to load assets");
 		}
+
 	}
 
 	void Renderer::run() {
@@ -32,6 +33,11 @@ namespace Renderer {
 		while (const std::optional event = m_window.pollEvent()) {
 			if (event->is<sf::Event::Closed>()) {
 				m_window.close();
+			}
+			else if (const auto* key = event->getIf<sf::Event::KeyPressed>()) {
+				if (key->scancode == sf::Keyboard::Scan::Escape) {
+					m_window.close();
+				}
 			}
 
 			if (m_renderState == RenderState::GameOver) {
@@ -82,7 +88,9 @@ namespace Renderer {
 		text.setFillColor(sf::Color::White);
 		text.setPosition({100, 250});
 
-		_boardView.draw(m_window);
+		_boardView.draw_board(m_window);
+		_boardView.draw_marks(m_window);
+		_boardView.draw_win_line(m_window);
 
 		if (m_renderState == RenderState::GameOver) {
 			if (m_winner == EngineCore::Player::PLAYER_X) {
