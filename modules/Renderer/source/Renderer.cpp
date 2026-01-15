@@ -88,7 +88,7 @@ namespace Renderer {
 
 		if (m_renderState == RenderState::GameOver) {
 			if (m_gameState.is_draw()) {
-				m_textRenderer.draw_game_over_text(m_window);
+				m_textRenderer.draw_game_over_text(m_window, "It's a Draw!");
 			}
 			else if (m_winner == EngineCore::Player::PLAYER_X) {
 				m_textRenderer.draw_game_over_text(m_window, "Player X Wins!");

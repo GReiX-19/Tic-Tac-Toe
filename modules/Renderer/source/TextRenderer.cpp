@@ -20,6 +20,7 @@ namespace Renderer {
 	void TextRenderer::draw_game_over_text(sf::RenderWindow& _window, std::string_view _text) {
 		const float yPosition = _window.getSize().y / 2.f;
 		draw_centered_text(_window, _text, 80, sf::Color::White, yPosition);
-		draw_centered_text(_window, "Press Enter to Restart", 50, sf::Color::White, yPosition + 20.f);
+		draw_centered_text(_window, "Press Enter to Restart", 50, sf::Color::White, yPosition + 80.f);
+		draw_centered_text(_window, "Or Press Escape to Exit the Game", 30, sf::Color::White, yPosition + 120.f);
 	}
 }
