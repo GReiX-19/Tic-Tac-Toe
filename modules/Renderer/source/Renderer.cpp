@@ -49,6 +49,9 @@ namespace Renderer {
 				}
 			}
 			else {
+				if (const auto* mouseMove = event->getIf<sf::Event::MouseMoved>()) {
+					m_mousePosition = { mouseMove->position.x, mouseMove->position.y };
+				}
 				if (const auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
 					if (mouse->button == sf::Mouse::Button::Left) {
 						const sf::Vector2i mousePos = { mouse->position.x, mouse->position.y };
@@ -57,10 +60,6 @@ namespace Renderer {
 						m_gameState.make_move(gridPos.x, gridPos.y);
 					}
 				}
-			}
-
-			if (const auto* mouseMove = event->getIf<sf::Event::MouseMoved>()) {
-				m_mousePosition = { mouseMove->position.x, mouseMove->position.y };
 			}
 		}
 	}

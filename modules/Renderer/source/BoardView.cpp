@@ -72,7 +72,7 @@ namespace Renderer {
 		int col = _mousePosition.x / static_cast<int>(m_cellSize);
 		int row = _mousePosition.y / static_cast<int>(m_cellSize);
 
-		if (m_gameState.get_board().get_CellState(row, col) != EngineCore::CellState::EMPTY) {
+		if (m_gameState.get_board().get_CellState(col, row) != EngineCore::CellState::EMPTY) {
 			return;
 		}
 
