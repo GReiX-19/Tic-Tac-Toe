@@ -19,12 +19,14 @@ namespace Renderer {
 			for (int col = 0; col < 3; col++) {
 				auto cell = board.get_CellState(row, col);
 				
-				sf::Sprite cellSprite (cell == EngineCore::CellState::X ?
-					m_assetsManager.get_texture("crossTexture") :
-					m_assetsManager.get_texture("circleTexture"));
+				if (cell != EngineCore::CellState::EMPTY) {
+					sf::Sprite cellSprite(cell == EngineCore::CellState::X ?
+						m_assetsManager.get_texture("crossTexture") :
+						m_assetsManager.get_texture("circleTexture"));
+					cellSprite.setPosition({ row * m_cellSize, col * m_cellSize });
+					_window.draw(cellSprite);
+				}
 
-				cellSprite.setPosition({ row * m_cellSize, col * m_cellSize });
-				_window.draw(cellSprite);
 			}
 		}
 	}
