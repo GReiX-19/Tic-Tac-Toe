@@ -10,7 +10,9 @@ namespace Renderer {
 
 		BoardView(const EngineCore::GameState& _gameState, AssetsManager& _assetsManager);
 
-		void draw(sf::RenderWindow& _window);
+		void draw_board(sf::RenderWindow& _window);
+		void draw_marks(sf::RenderWindow& _window);
+		void draw_win_line(sf::RenderWindow& _window);
 
 	private:
 		const EngineCore::GameState& m_gameState;
