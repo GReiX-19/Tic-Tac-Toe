@@ -72,13 +72,12 @@ namespace Renderer {
 		int col = _mousePosition.x / static_cast<int>(m_cellSize);
 		int row = _mousePosition.y / static_cast<int>(m_cellSize);
 
-		if (m_gameState.get_board().get_CellState(col, row) != EngineCore::CellState::EMPTY) {
-			return;
-		}
-
 		sf::RectangleShape highlightRect({ m_cellSize, m_cellSize });
 		highlightRect.setPosition({ col * m_cellSize, row * m_cellSize });
-		highlightRect.setFillColor(sf::Color(255, 255, 0, 100));
+		if (m_gameState.get_board().get_CellState(col, row) != EngineCore::CellState::EMPTY) 
+			highlightRect.setFillColor(sf::Color(255, 0, 0, 50));
+		else
+			highlightRect.setFillColor(sf::Color(255, 255, 0, 100));
 
 		_window.draw(highlightRect);
 	}
@@ -86,7 +85,10 @@ namespace Renderer {
 	void BoardView::keyboardHighlight_cell(sf::RenderWindow& _window, sf::Vector2i& _keyboardCursorPos) {
 		sf::RectangleShape highlightRect({ m_cellSize, m_cellSize });
 		highlightRect.setPosition({ _keyboardCursorPos.x * m_cellSize, _keyboardCursorPos.y * m_cellSize });
-		highlightRect.setFillColor(sf::Color(255, 255, 0, 100));
+		if (m_gameState.get_board().get_CellState(_keyboardCursorPos.x, _keyboardCursorPos.y) != EngineCore::CellState::EMPTY)
+			highlightRect.setFillColor(sf::Color(255, 0, 0, 50));
+		else
+			highlightRect.setFillColor(sf::Color(255, 255, 0, 100));
 
 		_window.draw(highlightRect);
 	}
