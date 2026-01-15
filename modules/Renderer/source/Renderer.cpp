@@ -11,7 +11,7 @@ namespace Renderer {
 		m_window.setFramerateLimit(60);
 
 		if (!m_assetsManager.load_font("mainFont", "Assets/Tuffy.ttf")
-			or !m_assetsManager.load_texture("mapTexture", "Assets/map.png")
+			or !m_assetsManager.load_texture("boardTexture", "Assets/board.png")
 			or !m_assetsManager.load_texture("circleTexture", "Assets/circle.png")
 			or !m_assetsManager.load_texture("crossTexture", "Assets/cross.png")) {
 			throw std::runtime_error("Failed to load assets");
@@ -19,7 +19,7 @@ namespace Renderer {
 	}
 
 	void Renderer::run() {
-		BoardView boardView(m_gameState);
+		BoardView boardView(m_gameState, m_assetsManager);
 
 		while (m_window.isOpen()) {
 			processEvents();
@@ -76,8 +76,7 @@ namespace Renderer {
 	void Renderer::render(BoardView& _boardView) {
 		m_window.clear(sf::Color::Black);
 
-		sf::Font font("Assets/Tuffy.ttf");
-		sf::Text text(font);
+		sf::Text text(m_assetsManager.get_font("mainFont"));
 
 		text.setCharacterSize(70);
 		text.setFillColor(sf::Color::White);
