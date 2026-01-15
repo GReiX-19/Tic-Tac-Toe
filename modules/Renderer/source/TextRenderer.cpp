@@ -1,0 +1,25 @@
+#include "TextRenderer.h"
+
+namespace Renderer {
+	TextRenderer::TextRenderer(AssetsManager& _assetsManager)
+		: m_assetsManager(_assetsManager) {
+	}
+
+	void TextRenderer::draw_centered_text(sf::RenderWindow& _window, std::string_view _text,
+		const size_t _charSize, const sf::Color& _color, const float _y) {
+		sf::Text text(m_assetsManager.get_font("mainFont"), sf::String(_text.data()), _charSize);
+		text.setFillColor(_color);
+
+		sf::FloatRect textBounds = text.getLocalBounds();
+		text.setOrigin({ textBounds.getCenter().x, textBounds.getCenter().y });
+		text.setPosition({ _window.getSize().x / 2.f, _y });
+
+		_window.draw(text);
+	}
+
+	void TextRenderer::draw_game_over_text(sf::RenderWindow& _window) {
+		const float yPosition = _window.getSize().y / 2.f;
+		draw_centered_text(_window, "Game Over", 80, sf::Color::White, yPosition);
+		draw_centered_text(_window, "Press Enter to Restart", 50, sf::Color::White, yPosition + 20.f);
+	}
+}
