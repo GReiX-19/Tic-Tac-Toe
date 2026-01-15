@@ -29,5 +29,7 @@ namespace Renderer {
 
 		AssetsManager m_assetsManager;
 		TextRenderer m_textRenderer;
+
+		sf::Vector2i m_mousePosition;
 	};
 }
