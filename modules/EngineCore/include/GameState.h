@@ -10,6 +10,7 @@ namespace EngineCore {
 			int row = -1;
 			int col = -1;
 			bool isDiagonal = false;
+			bool isAntiDiagonal = false;
 		};
 	public:
 		

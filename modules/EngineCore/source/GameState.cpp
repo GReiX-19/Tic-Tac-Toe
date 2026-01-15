@@ -59,8 +59,8 @@ namespace EngineCore {
 				m_board.get_CellState(i, 0) == m_board.get_CellState(i, 1) &&
 				m_board.get_CellState(i, 1) == m_board.get_CellState(i, 2)) {
 				info.isWin = true;
-				info.row = i;
-				info.col = 0;
+				info.row = -1;
+				info.col = i;
 				info.isDiagonal = false;
 				return info;
 			}
@@ -71,8 +71,8 @@ namespace EngineCore {
 				m_board.get_CellState(0, i) == m_board.get_CellState(1, i) &&
 				m_board.get_CellState(1, i) == m_board.get_CellState(2, i)) {
 				info.isWin = true;
-				info.row = 0;
-				info.col = i;
+				info.row = i;
+				info.col = -1;
 				info.isDiagonal = false;
 				return info;
 			}
@@ -82,18 +82,20 @@ namespace EngineCore {
 			m_board.get_CellState(0, 0) == m_board.get_CellState(1, 1) &&
 			m_board.get_CellState(1, 1) == m_board.get_CellState(2, 2)) {
 			info.isWin = true;
-			info.row = 0;
-			info.col = 0;
+			info.row = -1;
+			info.col = -1;
 			info.isDiagonal = true;
+			info.isAntiDiagonal = false;
 			return info;
 		}
 		if (m_board.get_CellState(0, 2) != CellState::EMPTY &&
 			m_board.get_CellState(0, 2) == m_board.get_CellState(1, 1) &&
 			m_board.get_CellState(1, 1) == m_board.get_CellState(2, 0)) {
 			info.isWin = true;
-			info.row = 0;
-			info.col = 2;
-			info.isDiagonal = true;
+			info.row = -1;
+			info.col = -1;
+			info.isDiagonal = false;
+			info.isAntiDiagonal = true;
 			return info;
 		}
 		return info;
