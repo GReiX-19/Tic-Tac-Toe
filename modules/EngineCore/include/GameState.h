@@ -5,6 +5,14 @@
 namespace EngineCore {
 	class GameState {
 	public:
+		struct winInfo {
+			bool isWin = false;
+			int row = -1;
+			int col = -1;
+			bool isDiagonal = false;
+			bool isAntiDiagonal = false;
+		};
+	public:
 		
 		GameState();
 
@@ -16,6 +24,8 @@ namespace EngineCore {
 		const Board& get_board() const;
 
 		void reset();
+
+		winInfo get_win_info() const;
 
 	private:
 		bool check_win_for(CellState _state) const;

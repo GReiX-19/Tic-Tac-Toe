@@ -9,10 +9,18 @@ namespace Renderer {
 		, m_renderState(RenderState::Playing)
 		, m_winner() {
 		m_window.setFramerateLimit(60);
+
+		if (!m_assetsManager.load_font("mainFont", "Assets/Tuffy.ttf")
+			or !m_assetsManager.load_texture("boardTexture", "Assets/board.png")
+			or !m_assetsManager.load_texture("circleTexture", "Assets/circle.png")
+			or !m_assetsManager.load_texture("crossTexture", "Assets/cross.png")) {
+			throw std::runtime_error("Failed to load assets");
+		}
+
 	}
 
 	void Renderer::run() {
-		BoardView boardView(m_gameState);
+		BoardView boardView(m_gameState, m_assetsManager);
 
 		while (m_window.isOpen()) {
 			processEvents();
@@ -25,6 +33,11 @@ namespace Renderer {
 		while (const std::optional event = m_window.pollEvent()) {
 			if (event->is<sf::Event::Closed>()) {
 				m_window.close();
+			}
+			else if (const auto* key = event->getIf<sf::Event::KeyPressed>()) {
+				if (key->scancode == sf::Keyboard::Scan::Escape) {
+					m_window.close();
+				}
 			}
 
 			if (m_renderState == RenderState::GameOver) {
@@ -69,14 +82,15 @@ namespace Renderer {
 	void Renderer::render(BoardView& _boardView) {
 		m_window.clear(sf::Color::Black);
 
-		sf::Font font("Assets/Tuffy.ttf");
-		sf::Text text(font);
+		sf::Text text(m_assetsManager.get_font("mainFont"));
 
 		text.setCharacterSize(70);
 		text.setFillColor(sf::Color::White);
 		text.setPosition({100, 250});
 
-		_boardView.draw(m_window);
+		_boardView.draw_board(m_window);
+		_boardView.draw_marks(m_window);
+		_boardView.draw_win_line(m_window);
 
 		if (m_renderState == RenderState::GameOver) {
 			if (m_gameState.is_draw()) {
