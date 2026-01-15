@@ -50,4 +50,52 @@ namespace EngineCore {
 	const Board& GameState::get_board() const {
 		return m_board;
 	}
+
+	GameState::winInfo GameState::get_win_info() const {
+		winInfo info;
+		// Check rows
+		for (int i = 0; i < 3; ++i) {
+			if (m_board.get_CellState(i, 0) != CellState::EMPTY &&
+				m_board.get_CellState(i, 0) == m_board.get_CellState(i, 1) &&
+				m_board.get_CellState(i, 1) == m_board.get_CellState(i, 2)) {
+				info.isWin = true;
+				info.row = i;
+				info.col = 0;
+				info.isDiagonal = false;
+				return info;
+			}
+		}
+		// Check columns
+		for (int i = 0; i < 3; ++i) {
+			if (m_board.get_CellState(0, i) != CellState::EMPTY &&
+				m_board.get_CellState(0, i) == m_board.get_CellState(1, i) &&
+				m_board.get_CellState(1, i) == m_board.get_CellState(2, i)) {
+				info.isWin = true;
+				info.row = 0;
+				info.col = i;
+				info.isDiagonal = false;
+				return info;
+			}
+		}
+		// Check diagonals
+		if (m_board.get_CellState(0, 0) != CellState::EMPTY &&
+			m_board.get_CellState(0, 0) == m_board.get_CellState(1, 1) &&
+			m_board.get_CellState(1, 1) == m_board.get_CellState(2, 2)) {
+			info.isWin = true;
+			info.row = 0;
+			info.col = 0;
+			info.isDiagonal = true;
+			return info;
+		}
+		if (m_board.get_CellState(0, 2) != CellState::EMPTY &&
+			m_board.get_CellState(0, 2) == m_board.get_CellState(1, 1) &&
+			m_board.get_CellState(1, 1) == m_board.get_CellState(2, 0)) {
+			info.isWin = true;
+			info.row = 0;
+			info.col = 2;
+			info.isDiagonal = true;
+			return info;
+		}
+		return info;
+	}
 }
