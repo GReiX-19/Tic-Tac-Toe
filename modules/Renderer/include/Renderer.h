@@ -2,6 +2,7 @@
 #include <GameState.h>
 #include "BoardView.h"
 #include "RenderState.h"
+#include "AssetsManager.h"
 #include <SFML/Graphics.hpp>
 
 namespace Renderer {
@@ -24,5 +25,7 @@ namespace Renderer {
 
 		RenderState m_renderState;
 		EngineCore::Player m_winner;
+
+		AssetsManager m_assetsManager;
 	};
 }

@@ -9,6 +9,13 @@ namespace Renderer {
 		, m_renderState(RenderState::Playing)
 		, m_winner() {
 		m_window.setFramerateLimit(60);
+
+		if (!m_assetsManager.load_font("mainFont", "Assets/Tuffy.ttf")
+			or !m_assetsManager.load_texture("mapTexture", "Assets/map.png")
+			or !m_assetsManager.load_texture("circleTexture", "Assets/circle.png")
+			or !m_assetsManager.load_texture("crossTexture", "Assets/cross.png")) {
+			throw std::runtime_error("Failed to load assets");
+		}
 	}
 
 	void Renderer::run() {
