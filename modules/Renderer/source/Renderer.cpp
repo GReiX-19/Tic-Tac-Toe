@@ -59,6 +59,9 @@ namespace Renderer {
 				}
 			}
 
+			if (const auto* mouseMove = event->getIf<sf::Event::MouseMoved>()) {
+				m_mousePosition = { mouseMove->position.x, mouseMove->position.y };
+			}
 		}
 	}
 
@@ -82,9 +85,7 @@ namespace Renderer {
 	void Renderer::render(BoardView& _boardView) {
 		m_window.clear(sf::Color::Black);
 
-		_boardView.draw_board(m_window);
-		_boardView.draw_marks(m_window);
-		_boardView.draw_win_line(m_window);
+		_boardView.draw(m_window, m_mousePosition);
 
 		if (m_renderState == RenderState::GameOver) {
 			if (m_gameState.is_draw()) {
