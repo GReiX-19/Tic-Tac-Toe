@@ -1,6 +1,5 @@
 #include "Renderer.h"
 #include <SFML/Window/Event.hpp>
-#include <iostream>
 
 namespace Renderer {
 
@@ -51,6 +50,7 @@ namespace Renderer {
 			}
 			else {
 				if (const auto* mouseMove = event->getIf<sf::Event::MouseMoved>()) {
+					m_isUsingKeyboard = false;
 					m_mousePosition = { mouseMove->position.x, mouseMove->position.y };
 				}
 				if (const auto* keyboard = event->getIf<sf::Event::KeyPressed>()) {
@@ -78,11 +78,9 @@ namespace Renderer {
 								m_keyboardCursorPos.x++;
 							break;
 						case sf::Keyboard::Scan::Enter:
-							m_gameState.make_move(m_keyboardCursorPos.y, m_keyboardCursorPos.x);
+							m_gameState.make_move(m_keyboardCursorPos.x, m_keyboardCursorPos.y);
 							break;
 					}
-
-					std::cout << "Keyboard Cursor Position: (" << m_keyboardCursorPos.x << ", " << m_keyboardCursorPos.y << ")\n";
 				}
 
 				if (const auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
