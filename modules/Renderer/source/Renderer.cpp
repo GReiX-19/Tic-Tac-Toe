@@ -7,7 +7,8 @@ namespace Renderer {
 		: m_gameState(_gameState)
 		, m_window(sf::VideoMode({ 600, 600 }), "Tic Tac Toe")
 		, m_renderState(RenderState::Playing)
-		, m_winner() {
+		, m_winner() 
+		, m_textRenderer(m_assetsManager) {
 		m_window.setFramerateLimit(60);
 
 		if (!m_assetsManager.load_font("mainFont", "Assets/Tuffy.ttf")
@@ -16,7 +17,6 @@ namespace Renderer {
 			or !m_assetsManager.load_texture("crossTexture", "Assets/cross.png")) {
 			throw std::runtime_error("Failed to load assets");
 		}
-
 	}
 
 	void Renderer::run() {
@@ -82,27 +82,20 @@ namespace Renderer {
 	void Renderer::render(BoardView& _boardView) {
 		m_window.clear(sf::Color::Black);
 
-		sf::Text text(m_assetsManager.get_font("mainFont"));
-
-		text.setCharacterSize(70);
-		text.setFillColor(sf::Color::White);
-		text.setPosition({100, 250});
-
 		_boardView.draw_board(m_window);
 		_boardView.draw_marks(m_window);
 		_boardView.draw_win_line(m_window);
 
 		if (m_renderState == RenderState::GameOver) {
 			if (m_gameState.is_draw()) {
-				text.setString("It's a Draw!");
+				m_textRenderer.draw_game_over_text(m_window);
 			}
 			else if (m_winner == EngineCore::Player::PLAYER_X) {
-				text.setString("Player X Wins!");
+				m_textRenderer.draw_game_over_text(m_window, "Player X Wins!");
 			}
 			else if (m_winner == EngineCore::Player::PLAYER_O) {
-				text.setString("Player O Wins!");
+				m_textRenderer.draw_game_over_text(m_window, "Player O Wins!");
 			}
-			m_window.draw(text);
 		}
 
 		m_window.display();
