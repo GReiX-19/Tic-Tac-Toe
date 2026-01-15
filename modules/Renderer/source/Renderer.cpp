@@ -5,7 +5,7 @@ namespace Renderer {
 
 	Renderer::Renderer(EngineCore::GameState& _gameState)
 		: m_gameState(_gameState)
-		, m_window(sf::VideoMode({ 600, 600 }), "Tic Tac Toe")
+		, m_window(sf::VideoMode({ 600, 600 }), "Tic Tac Toe", sf::Style::Titlebar | sf::Style::Close)
 		, m_renderState(RenderState::Playing)
 		, m_winner() 
 		, m_textRenderer(m_assetsManager) {
