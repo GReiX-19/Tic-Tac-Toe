@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include <SFML/Window/Event.hpp>
+#include <iostream>
 
 namespace Renderer {
 
@@ -52,11 +53,41 @@ namespace Renderer {
 				if (const auto* mouseMove = event->getIf<sf::Event::MouseMoved>()) {
 					m_mousePosition = { mouseMove->position.x, mouseMove->position.y };
 				}
+				if (const auto* keyboard = event->getIf<sf::Event::KeyPressed>()) {
+					m_isUsingKeyboard = true;
+
+					switch (keyboard->scancode) {
+						case sf::Keyboard::Scan::Up:
+						case sf::Keyboard::Scan::W:
+							if (m_keyboardCursorPos.y > 0)
+								m_keyboardCursorPos.y--;
+							break;
+						case sf::Keyboard::Scan::Down:
+						case sf::Keyboard::Scan::S:
+							if (m_keyboardCursorPos.y < 2)
+								m_keyboardCursorPos.y++;
+							break;
+						case sf::Keyboard::Scan::Left:
+						case sf::Keyboard::Scan::A:
+							if (m_keyboardCursorPos.x > 0)
+								m_keyboardCursorPos.x--;
+							break;
+						case sf::Keyboard::Scan::Right:
+						case sf::Keyboard::Scan::D:
+							if (m_keyboardCursorPos.x < 2)
+								m_keyboardCursorPos.x++;
+							break;
+						case sf::Keyboard::Scan::Enter:
+							m_gameState.make_move(m_keyboardCursorPos.y, m_keyboardCursorPos.x);
+							break;
+					}
+
+					std::cout << "Keyboard Cursor Position: (" << m_keyboardCursorPos.x << ", " << m_keyboardCursorPos.y << ")\n";
+				}
+
 				if (const auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
 					if (mouse->button == sf::Mouse::Button::Left) {
-						const sf::Vector2i mousePos = { mouse->position.x, mouse->position.y };
-						const sf::Vector2i gridPos = { mousePos.x / 200, mousePos.y / 200 };
-
+						const sf::Vector2i gridPos = { m_mousePosition.x / 200, m_mousePosition.y / 200 };
 						m_gameState.make_move(gridPos.x, gridPos.y);
 					}
 				}
@@ -84,7 +115,7 @@ namespace Renderer {
 	void Renderer::render(BoardView& _boardView) {
 		m_window.clear(sf::Color::Black);
 
-		_boardView.draw(m_window, m_mousePosition);
+		_boardView.draw(m_window, m_mousePosition, m_keyboardCursorPos, m_isUsingKeyboard);
 
 		if (m_renderState == RenderState::GameOver) {
 			if (m_gameState.is_draw()) {

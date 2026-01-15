@@ -63,7 +63,7 @@ namespace Renderer {
 		_window.draw(line);
 	}
 
-	void BoardView::highlight_cell(sf::RenderWindow& _window, sf::Vector2i& _mousePosition) {
+	void BoardView::mouseHighlight_cell(sf::RenderWindow& _window, sf::Vector2i& _mousePosition) {
 		if (_mousePosition.x < 0 or _mousePosition.x >= 600
 			or _mousePosition.y < 0 or _mousePosition.y >= 600) {
 			return;
@@ -83,10 +83,21 @@ namespace Renderer {
 		_window.draw(highlightRect);
 	}
 
-	void BoardView::draw(sf::RenderWindow& _window, sf::Vector2i& _mousePosition) {
+	void BoardView::keyboardHighlight_cell(sf::RenderWindow& _window, sf::Vector2i& _keyboardCursorPos) {
+		sf::RectangleShape highlightRect({ m_cellSize, m_cellSize });
+		highlightRect.setPosition({ _keyboardCursorPos.x * m_cellSize, _keyboardCursorPos.y * m_cellSize });
+		highlightRect.setFillColor(sf::Color(255, 255, 0, 100));
+
+		_window.draw(highlightRect);
+	}
+
+	void BoardView::draw(sf::RenderWindow& _window, sf::Vector2i& _mousePosition, sf::Vector2i& _keyboardCursorPos, bool& _isUsingKeyboard) {
 		draw_board(_window);
 		draw_marks(_window);
-		highlight_cell(_window, _mousePosition);
+		if (_isUsingKeyboard)
+			keyboardHighlight_cell(_window, _keyboardCursorPos);
+		else 
+			mouseHighlight_cell(_window, _mousePosition);
 		draw_win_line(_window);
 	}
 }
