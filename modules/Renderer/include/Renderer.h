@@ -3,7 +3,7 @@
 #include "BoardView.h"
 #include "AssetsManager.h"
 #include <AppState.h>
-#include "IScreen.h"
+#include "RenderScreens/IScreen.h"
 #include <SFML/Graphics.hpp>
 
 namespace Renderer {
