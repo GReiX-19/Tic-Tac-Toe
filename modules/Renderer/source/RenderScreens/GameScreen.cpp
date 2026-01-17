@@ -1,10 +1,11 @@
-#include "GameScreen.h"
+#include "RenderScreens/GameScreen.h"
 
 namespace Renderer {
 	GameScreen::GameScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _state)
 		: m_renderer(_renderer)
 		, m_assetsManager(_assetsManager)
 		, m_gameState(_state)
+		, m_textRenderer(_assetsManager)
 		, m_boardView(m_gameState, _assetsManager) {
 	}
 
@@ -59,11 +60,9 @@ namespace Renderer {
 
 	void GameScreen::update(float _dt) {
 		if (m_gameState.is_win(EngineCore::Player::PLAYER_X)) {
-			m_winner = EngineCore::Player::PLAYER_X;
 			m_renderer.switch_state(AppState::GameOver);
 		}
 		else if (m_gameState.is_win(EngineCore::Player::PLAYER_O)) {
-			m_winner = EngineCore::Player::PLAYER_O;
 			m_renderer.switch_state(AppState::GameOver);
 		}
 		else if (m_gameState.is_draw()) {
