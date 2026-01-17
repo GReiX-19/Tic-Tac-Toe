@@ -1,15 +1,17 @@
 #include "Renderer.h"
+#include "MenuScreen.h"
+#include "GameScreen.h"
+#include "GameOverScreen.h"
 #include <SFML/Window/Event.hpp>
 
 namespace Renderer {
 
 	Renderer::Renderer(EngineCore::GameState& _gameState)
 		: m_gameState(_gameState)
-		, m_window(sf::VideoMode({ 600, 600 }), "Tic Tac Toe", sf::Style::Titlebar | sf::Style::Close)
 		, m_appState(AppState::Menu)
-		, m_renderState(RenderState::Playing)
-		, m_winner() 
-		, m_textRenderer(m_assetsManager) {
+		, m_window(sf::VideoMode({ 600, 600 }), "Tic Tac Toe", sf::Style::Titlebar | sf::Style::Close)
+		, m_textRenderer(m_assetsManager)
+		, m_assetsManager() {
 		m_window.setFramerateLimit(60);
 
 		if (!m_assetsManager.load_font("mainFont", "Assets/Tuffy.ttf")
@@ -21,16 +23,34 @@ namespace Renderer {
 	}
 
 	void Renderer::run() {
-		BoardView boardView(m_gameState, m_assetsManager);
+		switch_state(AppState::Menu);
+
+		sf::Clock clock;
 
 		while (m_window.isOpen()) {
-			processEvents();
-			update();
-			render(boardView);
+			while (const std::optional event = m_window.pollEvent()) {
+
+				if (event->is<sf::Event::Closed>()) {
+					m_window.close();
+				}
+				else if (const auto* key = event->getIf<sf::Event::KeyPressed>()) {
+					if (key->scancode == sf::Keyboard::Scan::Escape) {
+						m_window.close();
+					}
+				}
+				m_currentScreen->handle_event(event.value());
+
+			}
+
+			const float dt = clock.restart().asSeconds();
+			m_currentScreen->update(dt);
+
+			m_currentScreen->draw(m_window);
+			m_window.display();
 		}
 	}
 
-	void Renderer::processEvents() {
+	/*void Renderer::processEvents() {
 		while (const std::optional event = m_window.pollEvent()) {
 			if (event->is<sf::Event::Closed>()) {
 				m_window.close();
@@ -129,7 +149,7 @@ namespace Renderer {
 		}
 
 		m_window.display();
-	}
+	}*/
 
 	void Renderer::switch_state(AppState _newState) {
 		m_appState = _newState;
@@ -139,10 +159,10 @@ namespace Renderer {
 			m_currentScreen = std::make_unique<MenuScreen>(*this, m_assetsManager);
 			break;
 		case AppState::Game:
-			m_currentScreen = std::make_unique<GameScreen>(*this, m_assetsManager);
+			m_currentScreen = std::make_unique<GameScreen>(*this, m_assetsManager, m_gameState);
 			break;
 		case AppState::GameOver:
-			m_currentScreen = std::make_unique<GameOverScreen>(*this, m_assetsManager);
+			m_currentScreen = std::make_unique<GameOverScreen>(*this, m_assetsManager, m_gameState);
 			break;
 		}
 	}
