@@ -2,7 +2,6 @@
 #include <GameState.h>
 #include "BoardView.h"
 #include "AssetsManager.h"
-#include "TextRenderer.h"
 #include <AppState.h>
 #include "IScreen.h"
 #include <SFML/Graphics.hpp>
@@ -23,7 +22,6 @@ namespace Renderer {
 
 		sf::RenderWindow m_window;
 		std::unique_ptr<IScreen> m_currentScreen;
-		TextRenderer m_textRenderer;
 
 		AssetsManager m_assetsManager;
 	};
