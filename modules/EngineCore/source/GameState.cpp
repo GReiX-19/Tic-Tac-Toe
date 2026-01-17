@@ -2,7 +2,7 @@
 
 namespace EngineCore {
 	GameState::GameState()
-		: m_board(), m_current_player(Player::PLAYER_X) {
+		: m_board(), m_current_player(Player::PLAYER_X), m_winner(Player::PLAYER_X) {
 	}
 
 	bool GameState::make_move(int _row, int _col) {
@@ -34,6 +34,17 @@ namespace EngineCore {
 		}
 		return false;
 	}
+	void GameState::determine_winner() {
+		if (is_win(Player::PLAYER_X)) {
+			m_winner = Player::PLAYER_X;
+		}
+		else if (is_win(Player::PLAYER_O)) {
+			m_winner = Player::PLAYER_O;
+		}
+		else {
+			m_winner = Player::PLAYER_X; // No winner
+		}
+	}
 
 	bool GameState::is_draw() const {
 		return m_board.is_full() && !is_win(Player::PLAYER_X) && !is_win(Player::PLAYER_O);
@@ -46,6 +57,9 @@ namespace EngineCore {
 
 	const Board& GameState::get_board() const {
 		return m_board;
+	}
+	const Player& GameState::get_winner() const {
+		return m_winner;
 	}
 
 	GameState::winInfo GameState::get_win_info() const {

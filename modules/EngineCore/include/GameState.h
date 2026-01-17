@@ -21,6 +21,7 @@ namespace EngineCore {
 		bool is_draw() const;
 
 		const Board& get_board() const;
+		const Player& get_winner() const;
 
 		void reset();
 
@@ -28,8 +29,10 @@ namespace EngineCore {
 
 	private:
 		bool check_win_for(CellState _state) const;
+		void determine_winner();
 	private:
 		Board m_board;
 		Player m_current_player;
+		Player m_winner;
 	};
 }
