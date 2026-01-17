@@ -13,7 +13,7 @@ namespace Renderer {
 		, m_assetsManager() {
 		m_window.setFramerateLimit(60);
 
-		if (!m_assetsManager.load_font("mainFont", "Assets/Tuffy.ttf")
+		if (!m_assetsManager.load_font("mainFont", "Assets/AveriaGruesaLibre-Regular.ttf")
 			or !m_assetsManager.load_texture("boardTexture", "Assets/board.png")
 			or !m_assetsManager.load_texture("circleTexture", "Assets/circle.png")
 			or !m_assetsManager.load_texture("crossTexture", "Assets/cross.png")) {
