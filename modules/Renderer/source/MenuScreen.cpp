@@ -2,16 +2,7 @@
 
 namespace Renderer {
 	MenuScreen::MenuScreen(Renderer& _renderer, AssetsManager& _assetsManager)
-		: m_renderer(_renderer), m_assetsManager(_assetsManager)
-		, m_titleText(_assetsManager.get_font("mainFont"))
-		, m_playButtonText(_assetsManager.get_font("mainFont")) {
-		m_titleText.setString("Tic Tac Toe");
-		m_titleText.setCharacterSize(64);
-		m_titleText.setPosition({ 120.f, 100.f });
-
-		m_playButtonText.setString("Play");
-		m_playButtonText.setCharacterSize(48);
-		m_playButtonText.setPosition({ 240.f, 300.f });
+		: m_renderer(_renderer), m_assetsManager(_assetsManager), m_textRenderer(_assetsManager) {
 	}
 
 	void MenuScreen::handle_event(const sf::Event& _event) {
@@ -27,7 +18,7 @@ namespace Renderer {
 	}
 
 	void MenuScreen::draw(sf::RenderWindow& _window) {
-		_window.draw(m_titleText);
-		_window.draw(m_playButtonText);
+		m_textRenderer.draw_centered_text(_window, "Welcome to Tic Tac Toe Game!", 40, sf::Color::White, (_window.getSize().y / 2.0f) - 30.f);
+		m_textRenderer.draw_centered_text(_window, "Press Enter to Start", 32, sf::Color::White, (_window.getSize().y / 2.0f) + 30.f);
 	}
 } 

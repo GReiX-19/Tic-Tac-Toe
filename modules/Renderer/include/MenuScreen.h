@@ -1,6 +1,7 @@
 #pragma once
 #include "IScreen.h"
 #include "AssetsManager.h"
+#include "TextRenderer.h"
 #include "Renderer.h"
 
 namespace Renderer {
@@ -16,8 +17,6 @@ namespace Renderer {
 	private:
 		Renderer& m_renderer;
 		AssetsManager& m_assetsManager;
-
-		sf::Text m_titleText;
-		sf::Text m_playButtonText;
+		TextRenderer m_textRenderer;
 	};
 }
