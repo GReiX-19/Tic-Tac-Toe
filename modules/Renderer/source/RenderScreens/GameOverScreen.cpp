@@ -76,13 +76,13 @@ namespace Renderer {
 		m_boardView.draw_marks(_window);
 		m_boardView.draw_win_line(_window);
 		
-		if (m_gameState.get_winner() == EngineCore::Player::PLAYER_X) {
+		if (m_gameState.is_win(EngineCore::Player::PLAYER_X)) {
 			m_textRenderer.draw_centered_text(_window, "Player X Wins!", 80, sf::Color::White, ((_window.getSize().y / 2.f) - 60.f));
 		}
-		else if (m_gameState.get_winner() == EngineCore::Player::PLAYER_O) {
+		else if (m_gameState.is_win(EngineCore::Player::PLAYER_O)) {
 			m_textRenderer.draw_centered_text(_window, "Player O Wins!", 80, sf::Color::White, ((_window.getSize().y / 2.f) - 60.f));
 		}
-		else {
+		else if (m_gameState.is_draw()) {
 			m_textRenderer.draw_centered_text(_window, "It's a Draw!", 80, sf::Color::White, ((_window.getSize().y / 2.f) - 60.f));
 		}
 
