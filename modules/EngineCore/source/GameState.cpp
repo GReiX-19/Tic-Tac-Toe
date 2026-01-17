@@ -44,9 +44,6 @@ namespace EngineCore {
 		m_current_player = Player::PLAYER_X;
 	}
 
-	Player GameState::get_current_player() const {
-		return m_current_player;
-	}
 	const Board& GameState::get_board() const {
 		return m_board;
 	}

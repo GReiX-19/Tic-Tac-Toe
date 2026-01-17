@@ -20,7 +20,6 @@ namespace EngineCore {
 		bool is_win(Player _player) const;
 		bool is_draw() const;
 
-		Player get_current_player() const;
 		const Board& get_board() const;
 
 		void reset();
