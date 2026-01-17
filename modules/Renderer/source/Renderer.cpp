@@ -18,7 +18,9 @@ namespace Renderer {
 			or !m_assetsManager.load_texture("circleTexture", "Assets/circle.png")
 			or !m_assetsManager.load_texture("crossTexture", "Assets/cross.png")
 			or !m_assetsManager.load_texture("playButton", "Assets/playButton.png")
-			or !m_assetsManager.load_texture("playButtonHovered", "Assets/playButtonHovered.png")) {
+			or !m_assetsManager.load_texture("playButtonHovered", "Assets/playButtonHovered.png")
+			or !m_assetsManager.load_texture("exitButton", "Assets/exitButton.png")
+			or !m_assetsManager.load_texture("exitButtonHovered", "Assets/exitButtonHovered.png")) {
 			throw std::runtime_error("Failed to load assets");
 		}
 	}
@@ -34,11 +36,7 @@ namespace Renderer {
 				if (event->is<sf::Event::Closed>()) {
 					m_window.close();
 				}
-				else if (const auto* key = event->getIf<sf::Event::KeyPressed>()) {
-					if (key->scancode == sf::Keyboard::Scan::Escape) {
-						m_window.close();
-					}
-				}
+
 				m_currentScreen->handle_event(event.value());
 
 			}
@@ -64,6 +62,9 @@ namespace Renderer {
 			break;
 		case AppState::GameOver:
 			m_currentScreen = std::make_unique<GameOverScreen>(*this, m_assetsManager, m_gameState);
+			break;
+		case AppState::Exit:
+			m_window.close();
 			break;
 		}
 	}
