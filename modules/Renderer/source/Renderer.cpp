@@ -25,7 +25,7 @@ namespace Renderer {
 			or !m_assetsManager.load_texture("restartButtonHovered", "Assets/buttons/restartButtonHovered.png")
 			or !m_assetsManager.load_texture("menuButton", "Assets/buttons/menuButton.png")
 			or !m_assetsManager.load_texture("menuButtonHovered", "Assets/buttons/menuButtonHovered.png")
-			or !m_assetsManager.load_texture("gameIcon", "Assets/gameIcon.ico")) {
+			or !m_assetsManager.load_texture("gameIcon", "Assets/gameIcon.png")) {
 			throw std::runtime_error("Failed to load assets");
 		}
 
