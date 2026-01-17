@@ -27,7 +27,6 @@ namespace Renderer {
 	}
 
 	void MenuScreen::draw(sf::RenderWindow& _window) {
-		_window.clear(sf::Color::Black);
 		_window.draw(m_titleText);
 		_window.draw(m_playButtonText);
 	}

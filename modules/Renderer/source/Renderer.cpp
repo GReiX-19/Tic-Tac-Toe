@@ -45,6 +45,7 @@ namespace Renderer {
 			const float dt = clock.restart().asSeconds();
 			m_currentScreen->update(dt);
 
+			m_window.clear(sf::Color::Black);
 			m_currentScreen->draw(m_window);
 			m_window.display();
 		}

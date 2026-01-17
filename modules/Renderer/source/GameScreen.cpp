@@ -72,7 +72,6 @@ namespace Renderer {
 	}
 
 	void GameScreen::draw(sf::RenderWindow& _window) {
-		_window.clear(sf::Color::Black);
 		m_boardView.draw(_window, m_mousePosition, m_keyboardCursorPos, m_isUsingKeyboard);
 	}
 }
