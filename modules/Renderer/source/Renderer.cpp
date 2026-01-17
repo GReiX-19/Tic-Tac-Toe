@@ -14,13 +14,17 @@ namespace Renderer {
 		m_window.setFramerateLimit(60);
 
 		if (!m_assetsManager.load_font("mainFont", "Assets/AveriaGruesaLibre-Regular.ttf")
-			or !m_assetsManager.load_texture("boardTexture", "Assets/board1.png")
+			or !m_assetsManager.load_texture("boardTexture", "Assets/board.png")
 			or !m_assetsManager.load_texture("circleTexture", "Assets/circle.png")
 			or !m_assetsManager.load_texture("crossTexture", "Assets/cross.png")
-			or !m_assetsManager.load_texture("playButton", "Assets/playButton.png")
-			or !m_assetsManager.load_texture("playButtonHovered", "Assets/playButtonHovered.png")
-			or !m_assetsManager.load_texture("exitButton", "Assets/exitButton.png")
-			or !m_assetsManager.load_texture("exitButtonHovered", "Assets/exitButtonHovered.png")) {
+			or !m_assetsManager.load_texture("playButton", "Assets/buttons/playButton.png")
+			or !m_assetsManager.load_texture("playButtonHovered", "Assets/buttons/playButtonHovered.png")
+			or !m_assetsManager.load_texture("exitButton", "Assets/buttons/exitButton.png")
+			or !m_assetsManager.load_texture("exitButtonHovered", "Assets/buttons/exitButtonHovered.png")
+			or !m_assetsManager.load_texture("restartButton", "Assets/buttons/restartButton.png")
+			or !m_assetsManager.load_texture("restartButtonHovered", "Assets/buttons/restartButtonHovered.png")
+			or !m_assetsManager.load_texture("menuButton", "Assets/buttons/menuButton.png")
+			or !m_assetsManager.load_texture("menuButtonHovered", "Assets/buttons/menuButtonHovered.png")) {
 			throw std::runtime_error("Failed to load assets");
 		}
 	}
