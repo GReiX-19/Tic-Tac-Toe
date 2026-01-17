@@ -1,7 +1,6 @@
 #pragma once
 #include <GameState.h>
 #include "BoardView.h"
-#include "RenderState.h"
 #include "AssetsManager.h"
 #include "TextRenderer.h"
 #include <AppState.h>
