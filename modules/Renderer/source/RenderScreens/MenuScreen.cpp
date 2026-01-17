@@ -5,13 +5,15 @@ namespace Renderer {
 		: m_renderer(_renderer), m_assetsManager(_assetsManager), m_textRenderer(_assetsManager)
 		, m_playButton(_assetsManager.get_texture("playButton")) {
 		m_playButton.setOrigin(m_playButton.getGlobalBounds().getCenter());
-		m_playButton.setPosition({ 400.f, 400.f });
+		m_playButton.setPosition({ 300.f, 350.f });
 	}
 
 	void MenuScreen::handle_event(const sf::Event& _event) {
 		if (const auto* mousePos = _event.getIf<sf::Event::MouseMoved>()) {
 			if (m_playButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position)))
 				m_playButton.setTexture(m_assetsManager.get_texture("playButtonHovered"));
+			else 
+				m_playButton.setTexture(m_assetsManager.get_texture("playButton"));
 		}
 
 		if (const auto* mousePos = _event.getIf<sf::Event::MouseButtonPressed>()) {
