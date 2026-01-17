@@ -21,15 +21,12 @@ namespace EngineCore {
 		bool is_draw() const;
 
 		const Board& get_board() const;
-		const Player& get_winner() const;
+		winInfo get_win_info() const;
 
 		void reset();
 
-		winInfo get_win_info() const;
-
 	private:
 		bool check_win_for(CellState _state) const;
-		void determine_winner();
 	private:
 		Board m_board;
 		Player m_current_player;
