@@ -16,13 +16,13 @@ namespace Renderer {
 
 		void run();
 
+		void switch_state(AppState _newState);
+
 	private:
 
 		void processEvents();
 		void update();
 		void render(BoardView& _boardView);
-
-		void switch_state(AppState& _newState);
 
 	private:
 		EngineCore::GameState& m_gameState;
