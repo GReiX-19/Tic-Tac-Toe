@@ -6,6 +6,7 @@ namespace Renderer {
 	Renderer::Renderer(EngineCore::GameState& _gameState)
 		: m_gameState(_gameState)
 		, m_window(sf::VideoMode({ 600, 600 }), "Tic Tac Toe", sf::Style::Titlebar | sf::Style::Close)
+		, m_appState(AppState::Menu)
 		, m_renderState(RenderState::Playing)
 		, m_winner() 
 		, m_textRenderer(m_assetsManager) {
@@ -128,6 +129,22 @@ namespace Renderer {
 		}
 
 		m_window.display();
+	}
+
+	void Renderer::switch_state(AppState& _newState) {
+		m_appState = _newState;
+
+		switch (_newState) {
+		case AppState::Menu:
+			m_currentScreen = std::make_unique<MenuScreen>(*this, m_assetsManager);
+			break;
+		case AppState::Game:
+			m_currentScreen = std::make_unique<GameScreen>(*this, m_assetsManager);
+			break;
+		case AppState::GameOver:
+			m_currentScreen = std::make_unique<GameOverScreen>(*this, m_assetsManager);
+			break;
+		}
 	}
 
 }

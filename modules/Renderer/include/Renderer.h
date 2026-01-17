@@ -22,7 +22,7 @@ namespace Renderer {
 		void update();
 		void render(BoardView& _boardView);
 
-		void SwitchState(AppState& _newState);
+		void switch_state(AppState& _newState);
 
 	private:
 		EngineCore::GameState& m_gameState;
