@@ -1,5 +1,6 @@
 project "GameApp"
 	kind "ConsoleApp"
+	icon "Assets/gameIcon.ico"
 
 	files {
 		"source/**.cpp",
