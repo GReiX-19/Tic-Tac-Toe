@@ -20,5 +20,6 @@ namespace Renderer {
 		TextRenderer m_textRenderer;
 
 		sf::Sprite m_playButton;
+		sf::Sprite m_exitButton;
 	};
 }
