@@ -55,6 +55,9 @@ namespace Renderer {
 			if (key->scancode == sf::Keyboard::Scan::Enter) {
 				m_renderer.switch_state(AppState::Game);
 			}
+			if (key->scancode == sf::Keyboard::Scan::Escape) {
+				m_renderer.switch_state(AppState::Exit);
+			}
 		}
 	}
 
