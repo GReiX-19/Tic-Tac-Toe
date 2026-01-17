@@ -24,9 +24,12 @@ namespace Renderer {
 			or !m_assetsManager.load_texture("restartButton", "Assets/buttons/restartButton.png")
 			or !m_assetsManager.load_texture("restartButtonHovered", "Assets/buttons/restartButtonHovered.png")
 			or !m_assetsManager.load_texture("menuButton", "Assets/buttons/menuButton.png")
-			or !m_assetsManager.load_texture("menuButtonHovered", "Assets/buttons/menuButtonHovered.png")) {
+			or !m_assetsManager.load_texture("menuButtonHovered", "Assets/buttons/menuButtonHovered.png")
+			or !m_assetsManager.load_texture("gameIcon", "Assets/gameIcon.png")) {
 			throw std::runtime_error("Failed to load assets");
 		}
+
+		m_window.setIcon(m_assetsManager.get_texture("gameIcon").copyToImage());
 	}
 
 	void Renderer::run() {
