@@ -20,5 +20,8 @@ namespace Renderer {
 		TextRenderer m_textRenderer;
 
 		BoardView m_boardView;
+
+		sf::Sprite m_restartButton;
+		sf::Sprite m_menuButton;
 	};
 }
