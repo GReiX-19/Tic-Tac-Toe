@@ -18,5 +18,7 @@ namespace Renderer {
 		Renderer& m_renderer;
 		AssetsManager& m_assetsManager;
 		TextRenderer m_textRenderer;
+
+		sf::Sprite m_playButton;
 	};
 }
