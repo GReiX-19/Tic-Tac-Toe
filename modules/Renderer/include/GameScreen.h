@@ -19,5 +19,11 @@ namespace Renderer {
 		EngineCore::GameState& m_gameState;
 
 		BoardView m_boardView;
+
+		sf::Vector2i m_mousePosition;
+		sf::Vector2i m_keyboardCursorPos;
+		bool m_isUsingKeyboard = false;
+
+		EngineCore::Player m_winner = EngineCore::Player::PLAYER_X;
 	};
 }

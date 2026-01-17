@@ -19,26 +19,13 @@ namespace Renderer {
 		void switch_state(AppState _newState);
 
 	private:
-
-		void processEvents();
-		void update();
-		void render(BoardView& _boardView);
-
-	private:
 		EngineCore::GameState& m_gameState;
-		sf::RenderWindow m_window;
-
 		AppState m_appState;
+
+		sf::RenderWindow m_window;
 		std::unique_ptr<IScreen> m_currentScreen;
-
-		RenderState m_renderState;
-		EngineCore::Player m_winner;
-
-		AssetsManager m_assetsManager;
 		TextRenderer m_textRenderer;
 
-		sf::Vector2i m_mousePosition;
-		sf::Vector2i m_keyboardCursorPos;
-		bool m_isUsingKeyboard = false;
+		AssetsManager m_assetsManager;
 	};
 }
