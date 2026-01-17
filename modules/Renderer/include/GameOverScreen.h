@@ -17,6 +17,8 @@ namespace Renderer {
 		AssetsManager& m_assetsManager;
 		EngineCore::GameState& m_gameState;
 
+		BoardView m_boardView;
+
 		sf::Text m_gameOverText;
 		sf::Text m_restartInstructionText;
 	};

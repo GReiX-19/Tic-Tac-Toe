@@ -6,7 +6,8 @@ namespace Renderer {
 		, m_assetsManager(_assetsManager)
 		, m_gameState(_state)
 		, m_gameOverText(_assetsManager.get_font("mainFont"))
-		, m_restartInstructionText(_assetsManager.get_font("mainFont")) {
+		, m_restartInstructionText(_assetsManager.get_font("mainFont")) 
+		, m_boardView(_state, _assetsManager) {
 		if (m_gameState.is_draw()) {
 			m_gameOverText.setString("It's a Draw!");
 		}
@@ -38,7 +39,9 @@ namespace Renderer {
 	}
 
 	void GameOverScreen::draw(sf::RenderWindow& _window) {
-		_window.clear(sf::Color::Black);
+		m_boardView.draw_board(_window);
+		m_boardView.draw_marks(_window);
+		m_boardView.draw_win_line(_window);
 		_window.draw(m_gameOverText);
 		_window.draw(m_restartInstructionText);
 	}
