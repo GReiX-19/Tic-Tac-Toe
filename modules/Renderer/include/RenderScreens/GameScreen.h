@@ -1,6 +1,7 @@
 #pragma once
 #include "IScreen.h"
 #include "AssetsManager.h"
+#include "TextRenderer.h"
 #include "Renderer.h"
 
 namespace Renderer {
@@ -17,13 +18,12 @@ namespace Renderer {
 		Renderer& m_renderer;
 		AssetsManager& m_assetsManager;
 		EngineCore::GameState& m_gameState;
+		TextRenderer m_textRenderer;
 
 		BoardView m_boardView;
 
 		sf::Vector2i m_mousePosition;
 		sf::Vector2i m_keyboardCursorPos;
 		bool m_isUsingKeyboard = false;
-
-		EngineCore::Player m_winner = EngineCore::Player::PLAYER_X;
 	};
 }
