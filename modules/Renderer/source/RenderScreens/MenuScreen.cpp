@@ -66,7 +66,7 @@ namespace Renderer {
 	}
 
 	void MenuScreen::draw(sf::RenderWindow& _window) {
-		m_textRenderer.draw_centered_text(_window, "Welcome to Tic Tac Toe Game!", 40, sf::Color::White, (_window.getSize().y / 2.0f) - 30.f);
+		m_textRenderer.draw_centered_text(_window, "Welcome to Tic Tac Toe Game!", 40, sf::Color::White, (_window.getSize().y / 2.0f) - 100.f);
 		_window.draw(m_playButton);
 		_window.draw(m_exitButton);
 	}
