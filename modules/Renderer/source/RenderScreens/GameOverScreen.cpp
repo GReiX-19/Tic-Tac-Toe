@@ -6,10 +6,56 @@ namespace Renderer {
 		, m_assetsManager(_assetsManager)
 		, m_gameState(_state)
 		, m_textRenderer(_assetsManager)
-		, m_boardView(_state, _assetsManager) {
+		, m_boardView(_state, _assetsManager) 
+		, m_restartButton(_assetsManager.get_texture("restartButton"))
+		, m_menuButton(_assetsManager.get_texture("menuButton")) {
+		m_restartButton.setOrigin(m_restartButton.getGlobalBounds().getCenter());
+		m_restartButton.setPosition({ 200.f, 350.f });
+		m_menuButton.setOrigin(m_menuButton.getGlobalBounds().getCenter());
+		m_menuButton.setPosition({ 400.f, 350.f });
 	}
 
 	void GameOverScreen::handle_event(const sf::Event& _event) {
+		if (const auto* mousePos = _event.getIf<sf::Event::MouseMoved>()) {
+			//Hover effect for play button
+			if (m_restartButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position)))
+				m_restartButton.setTexture(m_assetsManager.get_texture("restartButtonHovered"));
+			else
+				m_restartButton.setTexture(m_assetsManager.get_texture("restartButton"));
+
+			//Hover effect for exit button
+			if (m_menuButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position)))
+				m_menuButton.setTexture(m_assetsManager.get_texture("menuButtonHovered"));
+			else
+				m_menuButton.setTexture(m_assetsManager.get_texture("menuButton"));
+		}
+
+		if (const auto* mousePos = _event.getIf<sf::Event::MouseButtonPressed>()) {
+			if (mousePos->button == sf::Mouse::Button::Left) {
+				// Click effect for play button
+				if (m_restartButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position))) {
+					m_restartButton.setTexture(m_assetsManager.get_texture("restartButton"));
+				}
+				// Click effect for exit button
+				if (m_menuButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position))) {
+					m_menuButton.setTexture(m_assetsManager.get_texture("menuButton"));
+				}
+			}
+		}
+		else if (const auto* mousePos = _event.getIf<sf::Event::MouseButtonReleased>()) {
+			if (mousePos->button == sf::Mouse::Button::Left) {
+				// Switch to game state if play button is clicked
+				if (m_restartButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position))) {
+					m_gameState.reset();
+					m_renderer.switch_state(AppState::Game);
+				}
+				// Exit application if exit button is clicked
+				if (m_menuButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position))) {
+					m_renderer.switch_state(AppState::Menu);
+				}
+			}
+		}
+
 		if (const auto* key = _event.getIf<sf::Event::KeyPressed>()) {
 			if (key->scancode == sf::Keyboard::Scan::Enter) {
 				m_gameState.reset();
@@ -31,13 +77,16 @@ namespace Renderer {
 		m_boardView.draw_win_line(_window);
 		
 		if (m_gameState.get_winner() == EngineCore::Player::PLAYER_X) {
-			m_textRenderer.draw_game_over_text(_window, "Player X Wins!");
+			m_textRenderer.draw_centered_text(_window, "Player X Wins!", 80, sf::Color::White, ((_window.getSize().y / 2.f) - 60.f));
 		}
 		else if (m_gameState.get_winner() == EngineCore::Player::PLAYER_O) {
-			m_textRenderer.draw_game_over_text(_window, "Player O Wins!");
+			m_textRenderer.draw_centered_text(_window, "Player O Wins!", 80, sf::Color::White, ((_window.getSize().y / 2.f) - 60.f));
 		}
 		else {
-			m_textRenderer.draw_game_over_text(_window, "It's a Draw!");
+			m_textRenderer.draw_centered_text(_window, "It's a Draw!", 80, sf::Color::White, ((_window.getSize().y / 2.f) - 60.f));
 		}
+
+		_window.draw(m_restartButton);
+		_window.draw(m_menuButton);
 	}
 }
