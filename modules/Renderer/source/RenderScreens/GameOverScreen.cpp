@@ -27,6 +27,14 @@ namespace Renderer {
 		m_boardView.draw_marks(_window);
 		m_boardView.draw_win_line(_window);
 		
-		
+		if (m_gameState.get_winner() == EngineCore::Player::PLAYER_X) {
+			m_textRenderer.draw_game_over_text(_window, "Player X Wins!");
+		}
+		else if (m_gameState.get_winner() == EngineCore::Player::PLAYER_O) {
+			m_textRenderer.draw_game_over_text(_window, "Player O Wins!");
+		}
+		else {
+			m_textRenderer.draw_game_over_text(_window, "It's a Draw!");
+		}
 	}
 }
