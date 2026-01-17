@@ -14,9 +14,11 @@ namespace Renderer {
 		m_window.setFramerateLimit(60);
 
 		if (!m_assetsManager.load_font("mainFont", "Assets/AveriaGruesaLibre-Regular.ttf")
-			or !m_assetsManager.load_texture("boardTexture", "Assets/board.png")
+			or !m_assetsManager.load_texture("boardTexture", "Assets/board1.png")
 			or !m_assetsManager.load_texture("circleTexture", "Assets/circle.png")
-			or !m_assetsManager.load_texture("crossTexture", "Assets/cross.png")) {
+			or !m_assetsManager.load_texture("crossTexture", "Assets/cross.png")
+			or !m_assetsManager.load_texture("playButton", "Assets/playButton.png")
+			or !m_assetsManager.load_texture("playButtonHovered", "Assets/playButtonHovered.png")) {
 			throw std::runtime_error("Failed to load assets");
 		}
 	}
@@ -44,7 +46,7 @@ namespace Renderer {
 			const float dt = clock.restart().asSeconds();
 			m_currentScreen->update(dt);
 
-			m_window.clear(sf::Color::Black);
+			m_window.clear(sf::Color(96, 111, 206));
 			m_currentScreen->draw(m_window);
 			m_window.display();
 		}
