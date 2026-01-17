@@ -4,6 +4,8 @@
 #include "RenderState.h"
 #include "AssetsManager.h"
 #include "TextRenderer.h"
+#include <AppState.h>
+#include "IScreen.h"
 #include <SFML/Graphics.hpp>
 
 namespace Renderer {
@@ -20,9 +22,14 @@ namespace Renderer {
 		void update();
 		void render(BoardView& _boardView);
 
+		void SwitchState(AppState& _newState);
+
 	private:
 		EngineCore::GameState& m_gameState;
 		sf::RenderWindow m_window;
+
+		AppState m_appState;
+		std::unique_ptr<IScreen> m_currentScreen;
 
 		RenderState m_renderState;
 		EngineCore::Player m_winner;
