@@ -131,7 +131,7 @@ namespace Renderer {
 		m_window.display();
 	}
 
-	void Renderer::switch_state(AppState& _newState) {
+	void Renderer::switch_state(AppState _newState) {
 		m_appState = _newState;
 
 		switch (_newState) {
