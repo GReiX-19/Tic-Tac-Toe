@@ -4,6 +4,7 @@ namespace Renderer {
 	enum class AppState {
 		Menu,
 		Game,
-		GameOver
+		GameOver,
+		Exit
 	};
 }
