@@ -5,18 +5,12 @@
 namespace EngineCore {
 	class GameState {
 	public:
-		struct winInfo {
-			bool isWin = false;
-			int row = -1;
-			int col = -1;
-			bool isDiagonal = false;
-			bool isAntiDiagonal = false;
-		};
+		struct winInfo;
 	public:
 		
 		GameState();
 
-		bool make_move(int _row, int _col);
+		bool make_move(uint16_t _row, uint16_t _col);
 		bool is_win(Player _player) const;
 		bool is_draw() const;
 
@@ -26,7 +20,17 @@ namespace EngineCore {
 		void reset();
 
 	private:
+
 		bool check_win_for(CellState _state) const;
+
+	public:
+		struct winInfo {
+			int16_t row = -1;
+			int16_t col = -1;
+			bool isWin = false;
+			bool isDiagonal = false;
+			bool isAntiDiagonal = false;
+		};
 	private:
 		Board m_board;
 		Player m_current_player;

@@ -1,8 +1,11 @@
 #include "Renderer.h"
+#include "AssetsManager.h"
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Image.hpp>
 #include "RenderScreens/MenuScreen.h"
 #include "RenderScreens/GameScreen.h"
 #include "RenderScreens/GameOverScreen.h"
-#include <SFML/Window/Event.hpp>
 
 namespace Renderer {
 

@@ -1,10 +1,12 @@
 #pragma once
 #include "IScreen.h"
-#include "AssetsManager.h"
 #include "TextRenderer.h"
-#include "Renderer.h"
+#include "BoardView.h"
 
 namespace Renderer {
+	class Renderer;
+	class AssetsManager;
+
 	class GameScreen : public IScreen {
 	public:
 

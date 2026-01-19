@@ -1,4 +1,7 @@
 #include "RenderScreens/GameScreen.h"
+#include "Renderer.h"
+#include "AppState.h"
+#include "GameState.h"
 
 namespace Renderer {
 	GameScreen::GameScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _state)

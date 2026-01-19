@@ -1,10 +1,17 @@
 #pragma once
 #include "IScreen.h"
-#include "AssetsManager.h"
 #include "TextRenderer.h"
-#include "Renderer.h"
+#include "BoardView.h"
+#include <SFML/Graphics.hpp>
+
+namespace EngineCore {
+	class GameState;
+}
 
 namespace Renderer {
+	class Renderer;
+	class AssetsManager;
+
 	class GameOverScreen : public IScreen {
 	public:
 

@@ -1,5 +1,9 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+
+namespace sf {
+	class Event;
+	class RenderWindow;
+}
 
 namespace Renderer {
 	class IScreen {

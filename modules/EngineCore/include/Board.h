@@ -1,25 +1,24 @@
 #pragma once
 #include <array>
-#include "CellState.h"
 
 namespace EngineCore {
+	enum class CellState;
+
 	class Board {
-	public:
-
-		static constexpr int SIZE = 3;
-
 	public:
 
 		Board();
 
-		CellState get_CellState(int _row, int _col) const;
+		CellState get_CellState(uint16_t _row, uint16_t _col) const;
 
-		bool set_CellState(int _row, int _col, CellState _state);
+		bool set_CellState(uint16_t _row, uint16_t _col, CellState _state);
 
 		bool is_full() const;
 
 		void reset();
 
+	public:
+		static constexpr size_t SIZE = 3;
 	private:
 		std::array<std::array<CellState, SIZE>, SIZE> m_cells;
 	};

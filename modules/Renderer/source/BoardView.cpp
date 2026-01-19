@@ -1,12 +1,13 @@
 #include "BoardView.h"
+#include <SFML/Graphics.hpp>
+#include "AssetsManager.h"
 #include "GameState.h"
-#include "Board.h"
 #include "CellState.h"
 
 namespace Renderer {
 		
 	BoardView::BoardView(const EngineCore::GameState& _gameState, AssetsManager& _assetsManager)
-		: m_gameState(_gameState), m_cellSize(600.f / 3.f), m_assetsManager(_assetsManager) {
+		: m_gameState(_gameState), m_assetsManager(_assetsManager), m_cellSize(600.f / 3.f) {
 	}
 
 	void BoardView::draw_board(sf::RenderWindow& _window) {
@@ -63,14 +64,14 @@ namespace Renderer {
 		_window.draw(line);
 	}
 
-	void BoardView::mouseHighlight_cell(sf::RenderWindow& _window, sf::Vector2i& _mousePosition) {
+	void BoardView::mouseHighlight_cell(sf::RenderWindow& _window, const sf::Vector2i& _mousePosition) {
 		if (_mousePosition.x < 0 or _mousePosition.x >= 600
 			or _mousePosition.y < 0 or _mousePosition.y >= 600) {
 			return;
 		}
 
-		int col = _mousePosition.x / static_cast<int>(m_cellSize);
-		int row = _mousePosition.y / static_cast<int>(m_cellSize);
+		int16_t col = _mousePosition.x / static_cast<int16_t>(m_cellSize);
+		int16_t row = _mousePosition.y / static_cast<int16_t>(m_cellSize);
 
 		sf::RectangleShape highlightRect({ m_cellSize, m_cellSize });
 		highlightRect.setPosition({ col * m_cellSize, row * m_cellSize });
@@ -82,7 +83,7 @@ namespace Renderer {
 		_window.draw(highlightRect);
 	}
 
-	void BoardView::keyboardHighlight_cell(sf::RenderWindow& _window, sf::Vector2i& _keyboardCursorPos) {
+	void BoardView::keyboardHighlight_cell(sf::RenderWindow& _window, const sf::Vector2i& _keyboardCursorPos) {
 		sf::RectangleShape highlightRect({ m_cellSize, m_cellSize });
 		highlightRect.setPosition({ _keyboardCursorPos.x * m_cellSize, _keyboardCursorPos.y * m_cellSize });
 		if (m_gameState.get_board().get_CellState(_keyboardCursorPos.x, _keyboardCursorPos.y) != EngineCore::CellState::EMPTY)
@@ -93,7 +94,8 @@ namespace Renderer {
 		_window.draw(highlightRect);
 	}
 
-	void BoardView::draw(sf::RenderWindow& _window, sf::Vector2i& _mousePosition, sf::Vector2i& _keyboardCursorPos, bool& _isUsingKeyboard) {
+	void BoardView::draw(sf::RenderWindow& _window, const sf::Vector2i& _mousePosition, const sf::Vector2i& _keyboardCursorPos
+		, const bool& _isUsingKeyboard) {
 		draw_board(_window);
 		draw_marks(_window);
 		if (_isUsingKeyboard)

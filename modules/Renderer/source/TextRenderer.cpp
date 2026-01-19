@@ -1,4 +1,7 @@
 #include "TextRenderer.h"
+#include <SFML/Graphics/Text.hpp>
+#include "AssetsManager.h"
+#include <SFML/Graphics/RenderWindow.hpp>
 
 namespace Renderer {
 	TextRenderer::TextRenderer(AssetsManager& _assetsManager)
@@ -6,7 +9,7 @@ namespace Renderer {
 	}
 
 	void TextRenderer::draw_centered_text(sf::RenderWindow& _window, std::string_view _text,
-		const size_t _charSize, const sf::Color& _color, const float _y) {
+		const size_t& _charSize, const sf::Color& _color, const float& _y) {
 		sf::Text text(m_assetsManager.get_font("mainFont"), sf::String(_text.data()), _charSize);
 		text.setFillColor(_color);
 		text.setOutlineThickness(2.f);

@@ -1,4 +1,7 @@
 #include "RenderScreens/GameOverScreen.h"
+#include "GameState.h"
+#include "AssetsManager.h"
+#include "Renderer.h"
 
 namespace Renderer {
 	GameOverScreen::GameOverScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _state)

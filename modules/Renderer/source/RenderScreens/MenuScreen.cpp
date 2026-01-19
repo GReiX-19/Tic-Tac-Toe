@@ -1,4 +1,6 @@
 #include "RenderScreens/MenuScreen.h"
+#include "Renderer.h"
+#include "AssetsManager.h"
 
 namespace Renderer {
 	MenuScreen::MenuScreen(Renderer& _renderer, AssetsManager& _assetsManager)

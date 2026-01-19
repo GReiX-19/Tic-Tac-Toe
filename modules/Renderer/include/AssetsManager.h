@@ -1,9 +1,10 @@
 #pragma once
-#include <string>
+#include <string_view>
 #include <unordered_map>
 #include <memory>
 #include <filesystem>
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 namespace Renderer {
 	class AssetsManager {
@@ -11,11 +12,11 @@ namespace Renderer {
 
 		AssetsManager() = default;
 
-		bool load_font(const std::string& _name, const std::filesystem::path& _path);
-		bool load_texture(const std::string& _name, const std::filesystem::path& _path);
+		bool load_font(std::string_view _name, const std::filesystem::path& _path);
+		bool load_texture(std::string_view _name, const std::filesystem::path& _path);
 
-		sf::Font& get_font(const std::string& _name);
-		sf::Texture& get_texture(const std::string& _name);
+		sf::Font& get_font(std::string_view _name);
+		sf::Texture& get_texture(std::string_view _name);
 
 	private:
 		std::unordered_map<std::string, std::unique_ptr<sf::Font>> m_fonts;

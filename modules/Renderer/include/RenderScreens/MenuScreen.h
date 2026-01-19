@@ -1,10 +1,17 @@
 #pragma once
 #include "IScreen.h"
-#include "AssetsManager.h"
 #include "TextRenderer.h"
-#include "Renderer.h"
+#include <SFML/Graphics/Sprite.hpp>
+
+namespace sf {
+	class Event;
+	class RenderWindow;
+}
 
 namespace Renderer {
+	class Renderer;
+	class AssetsManager;
+
 	class MenuScreen : public IScreen {
 	public:
 

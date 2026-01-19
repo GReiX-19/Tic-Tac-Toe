@@ -1,11 +1,12 @@
 #include "GameState.h"
+#include "CellState.h"
 
 namespace EngineCore {
 	GameState::GameState()
 		: m_board(), m_current_player(Player::PLAYER_X), m_winner(Player::PLAYER_X) {
 	}
 
-	bool GameState::make_move(int _row, int _col) {
+	bool GameState::make_move(uint16_t _row, uint16_t _col) {
 		CellState state = (m_current_player == Player::PLAYER_X) ? CellState::X : CellState::O;
 		if (m_board.set_CellState(_row, _col, state)) {
 			m_current_player = (m_current_player == Player::PLAYER_X) ? Player::PLAYER_O : Player::PLAYER_X;

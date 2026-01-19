@@ -1,10 +1,13 @@
 #pragma once
-#include <GameState.h>
-#include "BoardView.h"
-#include "AssetsManager.h"
 #include <AppState.h>
+#include "AssetsManager.h"
 #include "RenderScreens/IScreen.h"
-#include <SFML/Graphics.hpp>
+#include <memory>
+#include <SFML/Graphics/RenderWindow.hpp>
+
+namespace EngineCore {
+	class GameState;
+}
 
 namespace Renderer {
 	class Renderer {
