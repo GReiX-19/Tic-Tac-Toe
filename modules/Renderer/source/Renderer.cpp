@@ -12,7 +12,7 @@ namespace Renderer {
 	Renderer::Renderer(EngineCore::GameState& _gameState)
 		: m_gameState(_gameState)
 		, m_appState(AppState::Menu)
-		, m_window(sf::VideoMode({ 600, 600 }), "Tic Tac Toe", sf::Style::Titlebar | sf::Style::Close)
+		, m_window(sf::VideoMode({ 600, 700 }), "Tic Tac Toe", sf::Style::Titlebar | sf::Style::Close)
 		, m_assetsManager() {
 		m_window.setFramerateLimit(60);
 
