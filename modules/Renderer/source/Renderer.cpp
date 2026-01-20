@@ -8,7 +8,6 @@
 #include "RenderScreens/GameOverScreen.h"
 
 namespace Renderer {
-
 	Renderer::Renderer(EngineCore::GameState& _gameState, AssetsManager& _assetsManager)
 		: m_gameState(_gameState)
 		, m_appState(AppState::Menu)
@@ -61,5 +60,4 @@ namespace Renderer {
 			break;
 		}
 	}
-
 }

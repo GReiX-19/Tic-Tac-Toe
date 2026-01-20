@@ -5,7 +5,6 @@
 #include "CellState.h"
 
 namespace Renderer {
-		
 	BoardView::BoardView(const EngineCore::GameState& _gameState, AssetsManager& _assetsManager)
 		: m_gameState(_gameState), m_assetsManager(_assetsManager), m_cellSize(600.f / 3.f) {
 	}

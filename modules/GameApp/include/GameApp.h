@@ -4,7 +4,6 @@
 #include "Renderer.h"
 
 namespace GameApp {
-
 	class GameApp {
 	public:
 
@@ -17,5 +16,4 @@ namespace GameApp {
 		AssetsManager m_assetsManager;
 		Renderer::Renderer m_renderer;
 	};
-
 }
