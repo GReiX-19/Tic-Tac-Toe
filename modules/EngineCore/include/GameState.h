@@ -11,11 +11,16 @@ namespace EngineCore {
 		GameState();
 
 		bool make_move(uint16_t _row, uint16_t _col);
-		bool is_win(Player _player) const;
-		bool is_draw() const;
+		bool is_win(Player _player);
+		bool is_draw();
 
 		const Board& get_board() const;
 		winInfo get_win_info() const;
+		uint16_t get_crossWins() const;
+		uint16_t get_circleWins() const;
+
+		void add_crossWin();
+		void add_circleWin();
 
 		void reset();
 
@@ -34,6 +39,7 @@ namespace EngineCore {
 	private:
 		Board m_board;
 		Player m_current_player;
-		Player m_winner;
+		uint16_t m_crossWins;
+		uint16_t m_cicleWins;
 	};
 }

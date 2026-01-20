@@ -3,7 +3,7 @@
 
 namespace EngineCore {
 	GameState::GameState()
-		: m_board(), m_current_player(Player::PLAYER_X), m_winner(Player::PLAYER_X) {
+		: m_board(), m_current_player(Player::PLAYER_X), m_crossWins(0), m_cicleWins(0) {
 	}
 
 	bool GameState::make_move(uint16_t _row, uint16_t _col) {
@@ -14,11 +14,11 @@ namespace EngineCore {
 		}
 		return false;
 	}
-	bool GameState::is_win(Player _player) const {
+	bool GameState::is_win(Player _player) {
 		CellState state = (_player == Player::PLAYER_X) ? CellState::X : CellState::O;
 		return check_win_for(state);
 	}
-	bool GameState::is_draw() const {
+	bool GameState::is_draw() {
 		return m_board.is_full() && !is_win(Player::PLAYER_X) && !is_win(Player::PLAYER_O);
 	}
 
@@ -73,6 +73,19 @@ namespace EngineCore {
 			return info;
 		}
 		return info;
+	}
+	uint16_t GameState::get_crossWins() const {
+		return m_crossWins;
+	}
+	uint16_t GameState::get_circleWins() const {
+		return m_cicleWins;
+	}
+
+	void GameState::add_crossWin() {
+		m_crossWins++;
+	}
+	void GameState::add_circleWin() {
+		m_cicleWins++;
 	}
 
 	void GameState::reset() {
