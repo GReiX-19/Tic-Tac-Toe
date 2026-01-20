@@ -2,6 +2,7 @@
 #include "Renderer.h"
 #include "AppState.h"
 #include "GameState.h"
+#include <SFML/Graphics/Sprite.hpp>
 
 namespace Renderer {
 	GameScreen::GameScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _state)
@@ -56,16 +57,19 @@ namespace Renderer {
 		if (const auto* mouse = _event.getIf<sf::Event::MouseButtonPressed>()) {
 			if (mouse->button == sf::Mouse::Button::Left) {
 				const sf::Vector2i gridPos = { m_mousePosition.x / 200, m_mousePosition.y / 200 };
-				m_gameState.make_move(gridPos.x, gridPos.y);
+				if (gridPos.y <= 2)
+					m_gameState.make_move(gridPos.x, gridPos.y);
 			}
 		}
 	}
 
 	void GameScreen::update(float _dt) {
 		if (m_gameState.is_win(EngineCore::Player::PLAYER_X)) {
+			m_gameState.add_crossWin();
 			m_renderer.switch_state(AppState::GameOver);
 		}
 		else if (m_gameState.is_win(EngineCore::Player::PLAYER_O)) {
+			m_gameState.add_circleWin();
 			m_renderer.switch_state(AppState::GameOver);
 		}
 		else if (m_gameState.is_draw()) {
@@ -74,6 +78,23 @@ namespace Renderer {
 	}
 
 	void GameScreen::draw(sf::RenderWindow& _window) {
+		sf::Sprite crossWins(m_assetsManager.get_texture("crossTexture"));
+		sf::Sprite circleWins(m_assetsManager.get_texture("circleTexture"));
+
+		crossWins.setOrigin(crossWins.getGlobalBounds().getCenter());
+		crossWins.scale({ 0.3f, 0.3f });
+		crossWins.setPosition({ (_window.getSize().x / 2) - 50.f, 630.f});
+
+		circleWins.setOrigin(circleWins.getGlobalBounds().getCenter());
+		circleWins.scale({ 0.3f, 0.3f });
+		circleWins.setPosition({ (_window.getSize().x / 2) + 50.f, 630.f });
+
 		m_boardView.draw(_window, m_mousePosition, m_keyboardCursorPos, m_isUsingKeyboard);
+
+		_window.draw(crossWins);
+		_window.draw(circleWins);
+
+		m_textRenderer.draw_text(_window, std::to_string(m_gameState.get_crossWins()), 30, sf::Color::White, (_window.getSize().x / 2) - 50.f, 670.f);
+		m_textRenderer.draw_text(_window, std::to_string(m_gameState.get_circleWins()), 30, sf::Color::White, (_window.getSize().x / 2) + 50.f, 670.f);
 	}
 }

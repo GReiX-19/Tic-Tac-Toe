@@ -76,6 +76,17 @@ namespace Renderer {
 	}
 
 	void GameOverScreen::draw(sf::RenderWindow& _window) {
+		sf::Sprite crossWins(m_assetsManager.get_texture("crossTexture"));
+		sf::Sprite circleWins(m_assetsManager.get_texture("circleTexture"));
+
+		crossWins.setOrigin(crossWins.getGlobalBounds().getCenter());
+		crossWins.scale({ 0.3f, 0.3f });
+		crossWins.setPosition({ (_window.getSize().x / 2) - 50.f, 630.f });
+
+		circleWins.setOrigin(circleWins.getGlobalBounds().getCenter());
+		circleWins.scale({ 0.3f, 0.3f });
+		circleWins.setPosition({ (_window.getSize().x / 2) + 50.f, 630.f });
+
 		m_boardView.draw_board(_window);
 		m_boardView.draw_marks(_window);
 		m_boardView.draw_win_line(_window);
@@ -90,6 +101,12 @@ namespace Renderer {
 			m_textRenderer.draw_centered_text(_window, "It's a Draw!", 80, sf::Color::White, ((_window.getSize().y / 2.f) - 60.f));
 		}
 
+		_window.draw(crossWins);
+		_window.draw(circleWins);
+
+		m_textRenderer.draw_text(_window, std::to_string(m_gameState.get_crossWins()), 30, sf::Color::White, (_window.getSize().x / 2) - 50.f, 670.f);
+		m_textRenderer.draw_text(_window, std::to_string(m_gameState.get_circleWins()), 30, sf::Color::White, (_window.getSize().x / 2) + 50.f, 670.f);
+		
 		_window.draw(m_restartButton);
 		_window.draw(m_menuButton);
 	}
