@@ -1,8 +1,6 @@
-#include "GameState.h"
-#include "Renderer.h"
+#include "GameApp.h"
 
 int main() {
-	EngineCore::GameState game;
-	Renderer::Renderer renderer(game);
-	renderer.run();
+	GameApp::GameApp game;
+	game.execute();
 }
