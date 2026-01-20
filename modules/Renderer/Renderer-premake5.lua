@@ -9,6 +9,7 @@ project "Renderer"
 	includedirs {
 		"include",
 		"../EngineCore/include",
+		"../GameApp/include",
 		"%{wks.location}/SFML/include"
 	}
 	
