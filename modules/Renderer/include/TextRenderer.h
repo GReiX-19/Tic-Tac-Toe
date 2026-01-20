@@ -6,9 +6,9 @@ namespace sf {
 	class Color;
 }
 
-namespace Renderer {
-	class AssetsManager;
+class AssetsManager;
 
+namespace Renderer {
 	class TextRenderer {
 	public:
 

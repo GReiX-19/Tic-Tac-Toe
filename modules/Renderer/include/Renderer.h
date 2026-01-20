@@ -1,6 +1,5 @@
 #pragma once
 #include <AppState.h>
-#include "AssetsManager.h"
 #include "RenderScreens/IScreen.h"
 #include <memory>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -9,11 +8,13 @@ namespace EngineCore {
 	class GameState;
 }
 
+class AssetsManager;
+
 namespace Renderer {
 	class Renderer {
 	public:
 
-		Renderer(EngineCore::GameState& _gameState);
+		Renderer(EngineCore::GameState& _gameState, AssetsManager& _assetsManager);
 
 		void run();
 
@@ -26,6 +27,6 @@ namespace Renderer {
 		sf::RenderWindow m_window;
 		std::unique_ptr<IScreen> m_currentScreen;
 
-		AssetsManager m_assetsManager;
+		AssetsManager& m_assetsManager;
 	};
 }

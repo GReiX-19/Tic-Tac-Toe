@@ -8,9 +8,10 @@ namespace sf {
 	class RenderWindow;
 }
 
+class AssetsManager;
+
 namespace Renderer {
 	class Renderer;
-	class AssetsManager;
 
 	class MenuScreen : public IScreen {
 	public:

@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "AssetsManager.h"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Image.hpp>

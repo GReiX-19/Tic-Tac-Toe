@@ -5,9 +5,9 @@ namespace EngineCore {
 	class GameState; 
 }
 
-namespace Renderer {
-	class AssetsManager;
+class AssetsManager;
 
+namespace Renderer {
 	class BoardView {
 	public:
 

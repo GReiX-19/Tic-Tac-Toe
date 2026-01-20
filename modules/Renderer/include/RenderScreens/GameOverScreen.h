@@ -8,9 +8,10 @@ namespace EngineCore {
 	class GameState;
 }
 
+class AssetsManager;
+
 namespace Renderer {
 	class Renderer;
-	class AssetsManager;
 
 	class GameOverScreen : public IScreen {
 	public:

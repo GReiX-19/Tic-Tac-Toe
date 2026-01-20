@@ -1,6 +1,5 @@
 #include "RenderScreens/GameOverScreen.h"
 #include "GameState.h"
-#include "AssetsManager.h"
 #include "Renderer.h"
 
 namespace Renderer {

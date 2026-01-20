@@ -2,10 +2,10 @@
 #include "IScreen.h"
 #include "TextRenderer.h"
 #include "BoardView.h"
+#include "AssetsManager.h"
 
 namespace Renderer {
 	class Renderer;
-	class AssetsManager;
 
 	class GameScreen : public IScreen {
 	public:
