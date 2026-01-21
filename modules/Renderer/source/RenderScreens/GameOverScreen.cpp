@@ -55,6 +55,7 @@ namespace Renderer {
 				// Exit application if exit button is clicked
 				if (m_menuButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position))) {
 					m_gameState.reset();
+					m_gameState.reset_wins();
 					m_renderer.switch_state(AppState::Menu);
 				}
 			}

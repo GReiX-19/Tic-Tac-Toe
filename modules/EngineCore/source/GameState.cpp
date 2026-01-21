@@ -108,4 +108,9 @@ namespace EngineCore {
 		}
 		return false;
 	}
+
+	void GameState::reset_wins() {
+		m_crossWins = 0;
+		m_cicleWins = 0;
+	}
 }
