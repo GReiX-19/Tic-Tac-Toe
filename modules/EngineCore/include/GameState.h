@@ -1,6 +1,7 @@
 #pragma once
 #include "Board.h"
-#include "Player.h"
+#include "User.h"
+#include "Bot.h"
 
 namespace EngineCore {
 	class GameState {
@@ -40,7 +41,9 @@ namespace EngineCore {
 		};
 	private:
 		Board m_board;
-		Player m_current_player;
+		User m_user;
+		Bot m_bot;
+		bool m_vsBot;
 		uint16_t m_crossWins;
 		uint16_t m_cicleWins;
 	};
