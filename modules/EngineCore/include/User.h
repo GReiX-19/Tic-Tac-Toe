@@ -15,7 +15,7 @@ namespace EngineCore {
 
 		User();
 
-		bool make_move(Board _board, std::pair<uint16_t, uint16_t> _cell);
+		bool make_move(Board& _board, const std::pair<uint16_t, uint16_t>& _cell);
 		void change_isCurrent();
 
 		Player get_status() const;
