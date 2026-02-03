@@ -6,9 +6,9 @@ namespace EngineCore {
 		: m_board(), m_current_player(Player::PLAYER_X), m_crossWins(0), m_cicleWins(0) {
 	}
 
-	bool GameState::make_move(uint16_t _row, uint16_t _col) {
+	bool GameState::make_move(std::pair<uint16_t, uint16_t> _cell) {
 		CellState state = (m_current_player == Player::PLAYER_X) ? CellState::X : CellState::O;
-		if (m_board.set_CellState(_row, _col, state)) {
+		if (m_board.set_CellState(_cell.first, _cell.second, state)) {
 			m_current_player = (m_current_player == Player::PLAYER_X) ? Player::PLAYER_O : Player::PLAYER_X;
 			return true;
 		}
