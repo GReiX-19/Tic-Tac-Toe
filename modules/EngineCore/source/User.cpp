@@ -13,8 +13,8 @@ namespace EngineCore {
 		}
 		return false;
 	}
-	void User::change_isCurrent() {
-		m_isCurrent = (m_isCurrent == true) ? false : true;
+	void User::change_isCurrent(bool _isCurrent) {
+		m_isCurrent = _isCurrent;
 	}
 
 	Player User::get_status() const {

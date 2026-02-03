@@ -16,7 +16,7 @@ namespace EngineCore {
 		Bot();
 
 		bool make_move(Board& _board);
-		void change_isCurrent();
+		void change_isCurrent(bool _isCurrent);
 
 		Player get_status() const;
 		bool is_current() const;

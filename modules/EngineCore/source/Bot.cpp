@@ -13,8 +13,8 @@ namespace EngineCore {
 
 		return false;
 	}
-	void Bot::change_isCurrent() {
-		m_isCurrent = (m_isCurrent == true) ? false : true;
+	void Bot::change_isCurrent(bool _isCurrent) {
+		m_isCurrent = _isCurrent;
 	}
 
 	Player Bot::get_status() const {
