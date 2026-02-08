@@ -7,8 +7,8 @@ namespace EngineCore {
 	}
 
 	void GameState::make_move(const std::pair<uint16_t, uint16_t>& _cell) {
-		m_user.make_move(m_board, _cell);
-		m_bot.make_move(m_board);
+		m_user.make_move(m_board, _cell, m_vsBot);
+		if (m_vsBot) m_bot.make_move(m_board);
 	}
 	bool GameState::is_win(PlayerMark _player) {
 		CellState state = (_player == PlayerMark::PLAYER_X) ? CellState::X : CellState::O;
