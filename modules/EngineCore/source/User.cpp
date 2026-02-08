@@ -4,10 +4,10 @@
 #include <utility>
 
 namespace EngineCore {
-	User::User() : m_userStatus(Player::PLAYER_X), m_isCurrent(true) {}
+	User::User(PlayerMark _playerStatus, bool _isCurrent) : IPlayer(_playerStatus, _isCurrent) {}
 
 	bool User::make_move(Board& _board, const std::pair<uint16_t, uint16_t>& _cell) {
-		CellState state = (get_status() == Player::PLAYER_X) ? CellState::X : CellState::O;
+		CellState state = (get_status() == PlayerMark::PLAYER_X) ? CellState::X : CellState::O;
 		if (_board.set_CellState(_cell.first, _cell.second , state)) {
 			return true;
 		}
@@ -17,8 +17,8 @@ namespace EngineCore {
 		m_isCurrent = _isCurrent;
 	}
 
-	Player User::get_status() const {
-		return m_userStatus;
+	PlayerMark User::get_status() const {
+		return m_playerStatus;
 	}
 	bool User::is_current() const {
 		return m_isCurrent;
