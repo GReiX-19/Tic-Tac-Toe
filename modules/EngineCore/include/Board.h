@@ -9,9 +9,9 @@ namespace EngineCore {
 
 		Board();
 
-		CellState get_CellState(uint16_t _row, uint16_t _col) const;
+		CellState get_CellState(std::pair<uint16_t, uint16_t> _cell) const;
 
-		bool set_CellState(uint16_t _row, uint16_t _col, CellState _state);
+		bool set_CellState(std::pair<uint16_t, uint16_t> _cell, CellState _state);
 
 		bool is_full() const;
 
