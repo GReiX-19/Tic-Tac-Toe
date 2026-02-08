@@ -5,14 +5,11 @@ namespace EngineCore {
 	class Bot : public IPlayer {
 	public:
 
-		Bot(PlayerMark _playerStatus, bool _isCurrent);
+		Bot(PlayerMark _playerStatus);
 
 		bool make_move(Board& _board);
 
-		void change_isCurrent(bool _isCurrent) override;
-
 		PlayerMark get_status() const override;
-		bool is_current() const override;
 
 	};
 }

@@ -3,18 +3,12 @@
 
 namespace EngineCore {
 	GameState::GameState()
-		: m_board(), m_user(), m_bot(), m_vsBot(true), m_crossWins(0), m_cicleWins(0) {
+		: m_board(), m_user(PlayerMark::PLAYER_X), m_bot(PlayerMark::PLAYER_O), m_vsBot(true), m_crossWins(0), m_cicleWins(0) {
 	}
 
-	bool GameState::make_move(std::pair<uint16_t, uint16_t> _cell) {
-		if (m_user.is_current()) {
-			m_user.make_move(m_board, _cell); m_user.change_isCurrent(false);
-			m_bot.make_move(m_board); m_bot.change_isCurrent(true);
-		}
-		else {
-			m_bot.make_move(m_board); m_bot.change_isCurrent(false);
-			m_user.make_move(m_board, _cell); m_user.change_isCurrent(true);
-		}
+	bool GameState::make_move(const std::pair<uint16_t, uint16_t>& _cell) {
+		m_user.make_move(m_board, _cell);
+		m_bot.make_move(m_board);
 	}
 	bool GameState::is_win(PlayerMark _player) {
 		CellState state = (_player == PlayerMark::PLAYER_X) ? CellState::X : CellState::O;
@@ -92,8 +86,6 @@ namespace EngineCore {
 
 	void GameState::reset() {
 		m_board.reset();
-		m_user.change_isCurrent(true);
-		m_bot.change_isCurrent(false);
 	}
 
 	bool GameState::check_win_for(CellState _state) const {

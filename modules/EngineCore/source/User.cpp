@@ -4,7 +4,7 @@
 #include <utility>
 
 namespace EngineCore {
-	User::User(PlayerMark _playerStatus, bool _isCurrent) : IPlayer(_playerStatus, _isCurrent) {}
+	User::User(PlayerMark _playerStatus) : IPlayer(_playerStatus) {}
 
 	bool User::make_move(Board& _board, const std::pair<uint16_t, uint16_t>& _cell) {
 		CellState state = (get_status() == PlayerMark::PLAYER_X) ? CellState::X : CellState::O;
@@ -13,14 +13,8 @@ namespace EngineCore {
 		}
 		return false;
 	}
-	void User::change_isCurrent(bool _isCurrent) {
-		m_isCurrent = _isCurrent;
-	}
 
 	PlayerMark User::get_status() const {
 		return m_playerStatus;
-	}
-	bool User::is_current() const {
-		return m_isCurrent;
 	}
 }
