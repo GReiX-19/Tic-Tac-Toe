@@ -12,7 +12,7 @@ namespace EngineCore {
 		GameState();
 
 		bool make_move(std::pair<uint16_t, uint16_t> _cell);
-		bool is_win(Player _player);
+		bool is_win(PlayerMark _player);
 		bool is_draw();
 
 		const Board& get_board() const;

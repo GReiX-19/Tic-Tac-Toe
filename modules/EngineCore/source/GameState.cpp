@@ -16,8 +16,8 @@ namespace EngineCore {
 			m_user.make_move(m_board, _cell); m_user.change_isCurrent(true);
 		}
 	}
-	bool GameState::is_win(Player _player) {
-		CellState state = (_player == Player::PLAYER_X) ? CellState::X : CellState::O;
+	bool GameState::is_win(PlayerMark _player) {
+		CellState state = (_player == PlayerMark::PLAYER_X) ? CellState::X : CellState::O;
 		return check_win_for(state);
 	}
 	bool GameState::is_draw() {
