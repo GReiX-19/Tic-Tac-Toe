@@ -49,7 +49,7 @@ namespace Renderer {
 					m_keyboardCursorPos.x++;
 				break;
 			case sf::Keyboard::Scan::Enter:
-				m_gameState.make_move(m_keyboardCursorPos.x, m_keyboardCursorPos.y);
+				m_gameState.make_move({m_keyboardCursorPos.x, m_keyboardCursorPos.y});
 				break;
 			}
 		}
@@ -58,17 +58,17 @@ namespace Renderer {
 			if (mouse->button == sf::Mouse::Button::Left) {
 				const sf::Vector2i gridPos = { m_mousePosition.x / 200, m_mousePosition.y / 200 };
 				if (gridPos.y <= 2)
-					m_gameState.make_move(gridPos.x, gridPos.y);
+					m_gameState.make_move({ gridPos.x, gridPos.y });
 			}
 		}
 	}
 
 	void GameScreen::update(float _dt) {
-		if (m_gameState.is_win(EngineCore::Player::PLAYER_X)) {
+		if (m_gameState.is_win(EngineCore::PlayerMark::PLAYER_X)) {
 			m_gameState.add_crossWin();
 			m_renderer.switch_state(AppState::GameOver);
 		}
-		else if (m_gameState.is_win(EngineCore::Player::PLAYER_O)) {
+		else if (m_gameState.is_win(EngineCore::PlayerMark::PLAYER_O)) {
 			m_gameState.add_circleWin();
 			m_renderer.switch_state(AppState::GameOver);
 		}
