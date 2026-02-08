@@ -11,13 +11,12 @@ namespace EngineCore {
 
 		if (can_win(_board, cell, state))
 			_board.set_CellState(cell, state);
-		if (can_win(_board, cell, state))
+		else if (find_center(_board, cell))
 			_board.set_CellState(cell, state);
-		if (can_win(_board, cell, state))
+		else if (find_corner(_board, cell))
 			_board.set_CellState(cell, state);
-		
-		find_any(_board, cell);
-		_board.set_CellState(cell, state);
+		else if (find_any(_board, cell))
+			_board.set_CellState(cell, state);
 	}
 
 	PlayerMark Bot::get_status() const {
