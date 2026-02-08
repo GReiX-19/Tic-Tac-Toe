@@ -1,28 +1,18 @@
 #pragma once
-#include "Player.h"
-#include <cstdint>
-
-namespace std {
-	template<class T1, class T2>
-	struct pair;
-}
+#include "IPlayer.h"
 
 namespace EngineCore {
-	class Board;
-
-	class Bot {
+	class Bot : public IPlayer {
 	public:
 
-		Bot();
+		Bot(PlayerMark _playerStatus, bool _isCurrent);
 
 		bool make_move(Board& _board);
-		void change_isCurrent(bool _isCurrent);
 
-		Player get_status() const;
-		bool is_current() const;
+		void change_isCurrent(bool _isCurrent) override;
 
-	private:
-		Player m_userStatus;
-		bool m_isCurrent;
+		PlayerMark get_status() const override;
+		bool is_current() const override;
+
 	};
 }
