@@ -24,7 +24,7 @@ namespace EngineCore {
 		return m_playerStatus;
 	}
 
-	bool Bot::can_win(const Board& _board, std::pair<uint16_t, uint16_t>& _cell, const CellState& _state) {
+	bool Bot::can_win(const Board& _board, std::pair<uint16_t, uint16_t>& _cell, CellState _state) {
 		for (uint16_t row = 0; row < 3; row++) {
 			for (uint16_t col = 0; col < 3; col++) {
 				if (_board.get_CellState({ row, col }) != CellState::EMPTY)
@@ -83,7 +83,7 @@ namespace EngineCore {
 		return false;
 	}
 
-	bool Bot::check_win(const Board& _board, const CellState& _state) {
+	bool Bot::check_win(const Board& _board, CellState _state) {
 		for (int i = 0; i < 3; ++i) {
 			if ((_board.get_CellState({ i, 0 }) == _state && _board.get_CellState({ i, 1 }) == _state && _board.get_CellState({ i, 2 }) == _state) ||
 				(_board.get_CellState({ 0, i }) == _state && _board.get_CellState({ 1, i }) == _state && _board.get_CellState({ 2, i }) == _state)) {

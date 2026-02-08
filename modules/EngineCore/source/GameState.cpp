@@ -6,7 +6,7 @@ namespace EngineCore {
 		: m_board(), m_user(PlayerMark::PLAYER_X), m_bot(PlayerMark::PLAYER_O), m_vsBot(true), m_crossWins(0), m_cicleWins(0) {
 	}
 
-	bool GameState::make_move(const std::pair<uint16_t, uint16_t>& _cell) {
+	void GameState::make_move(const std::pair<uint16_t, uint16_t>& _cell) {
 		m_user.make_move(m_board, _cell);
 		m_bot.make_move(m_board);
 	}
