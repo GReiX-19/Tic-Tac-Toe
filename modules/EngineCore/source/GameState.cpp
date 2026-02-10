@@ -3,7 +3,7 @@
 
 namespace EngineCore {
 	GameState::GameState()
-		: m_board(), m_user(PlayerMark::PLAYER_X), m_bot(PlayerMark::PLAYER_O), m_vsBot(true), m_crossWins(0), m_cicleWins(0) {
+		: m_board(), m_user(PlayerMark::PLAYER_X), m_bot(PlayerMark::PLAYER_O), m_vsBot(false), m_crossWins(0), m_cicleWins(0) {
 	}
 
 	void GameState::make_move(const std::pair<uint16_t, uint16_t>& _cell) {
@@ -107,5 +107,10 @@ namespace EngineCore {
 	void GameState::reset_wins() {
 		m_crossWins = 0;
 		m_cicleWins = 0;
+	}
+
+	bool GameState::vs_bot() {
+		m_vsBot = (m_vsBot == false) ? true : false;
+		return m_vsBot;
 	}
 }

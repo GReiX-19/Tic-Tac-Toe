@@ -27,6 +27,8 @@ namespace EngineCore {
 
 		void reset_wins();
 
+		bool vs_bot();
+
 	private:
 
 		bool check_win_for(CellState _state) const;
