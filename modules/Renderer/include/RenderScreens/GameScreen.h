@@ -3,6 +3,7 @@
 #include "TextRenderer.h"
 #include "BoardView.h"
 #include "AssetsManager.h"
+#include <SFML/Graphics/Sprite.hpp>
 
 namespace Renderer {
 	class Renderer;
@@ -27,5 +28,7 @@ namespace Renderer {
 		sf::Vector2i m_mousePosition;
 		sf::Vector2i m_keyboardCursorPos;
 		bool m_isUsingKeyboard = false;
+
+		sf::Sprite m_vsBotButton;
 	};
 }
