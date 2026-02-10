@@ -13,7 +13,9 @@ AssetsManager::AssetsManager() {
 		or !load_texture("restartButtonHovered", "Assets/buttons/restartButtonHovered.png")
 		or !load_texture("menuButton", "Assets/buttons/menuButton.png")
 		or !load_texture("menuButtonHovered", "Assets/buttons/menuButtonHovered.png")
-		or !load_texture("gameIcon", "Assets/gameIcon.png")) {
+		or !load_texture("gameIcon", "Assets/gameIcon.png")
+		or !load_texture("vsBotButton", "Assets/buttons/vsBotButton.png")
+		or !load_texture("vsBotButtonHovered", "Assets/buttons/vsBotButtonHovered.png")) {
 		throw std::runtime_error("Failed to load assets");
 	}
 }
