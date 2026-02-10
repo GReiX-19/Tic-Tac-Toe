@@ -67,6 +67,8 @@ namespace Renderer {
 				m_renderer.switch_state(AppState::Game);
 			}
 			if (key->scancode == sf::Keyboard::Scan::Escape) {
+				m_gameState.reset();
+				m_gameState.reset_wins();
 				m_renderer.switch_state(AppState::Menu);
 			}
 		}
@@ -92,10 +94,10 @@ namespace Renderer {
 		m_boardView.draw_marks(_window);
 		m_boardView.draw_win_line(_window);
 		
-		if (m_gameState.is_win(EngineCore::Player::PLAYER_X)) {
+		if (m_gameState.is_win(EngineCore::PlayerMark::PLAYER_X)) {
 			m_textRenderer.draw_centered_text(_window, "Player X Wins!", 80, sf::Color::White, ((_window.getSize().y / 2.f) - 60.f));
 		}
-		else if (m_gameState.is_win(EngineCore::Player::PLAYER_O)) {
+		else if (m_gameState.is_win(EngineCore::PlayerMark::PLAYER_O)) {
 			m_textRenderer.draw_centered_text(_window, "Player O Wins!", 80, sf::Color::White, ((_window.getSize().y / 2.f) - 60.f));
 		}
 		else if (m_gameState.is_draw()) {

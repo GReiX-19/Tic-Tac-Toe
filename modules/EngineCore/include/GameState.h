@@ -1,6 +1,7 @@
 #pragma once
 #include "Board.h"
-#include "Player.h"
+#include "User.h"
+#include "Bot.h"
 
 namespace EngineCore {
 	class GameState {
@@ -10,8 +11,8 @@ namespace EngineCore {
 		
 		GameState();
 
-		bool make_move(uint16_t _row, uint16_t _col);
-		bool is_win(Player _player);
+		void make_move(const std::pair<uint16_t, uint16_t>& _cell);
+		bool is_win(PlayerMark _player);
 		bool is_draw();
 
 		const Board& get_board() const;
@@ -25,6 +26,8 @@ namespace EngineCore {
 		void reset();
 
 		void reset_wins();
+
+		bool vs_bot();
 
 	private:
 
@@ -40,7 +43,9 @@ namespace EngineCore {
 		};
 	private:
 		Board m_board;
-		Player m_current_player;
+		User m_user;
+		Bot m_bot;
+		bool m_vsBot;
 		uint16_t m_crossWins;
 		uint16_t m_cicleWins;
 	};

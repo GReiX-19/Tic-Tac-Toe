@@ -1,7 +1,7 @@
 #pragma once
 
 namespace EngineCore {
-	enum class Player {
+	enum class PlayerMark {
 		PLAYER_X,
 		PLAYER_O
 	};

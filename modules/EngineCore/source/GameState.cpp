@@ -3,23 +3,19 @@
 
 namespace EngineCore {
 	GameState::GameState()
-		: m_board(), m_current_player(Player::PLAYER_X), m_crossWins(0), m_cicleWins(0) {
+		: m_board(), m_user(PlayerMark::PLAYER_X), m_bot(PlayerMark::PLAYER_O), m_vsBot(false), m_crossWins(0), m_cicleWins(0) {
 	}
 
-	bool GameState::make_move(uint16_t _row, uint16_t _col) {
-		CellState state = (m_current_player == Player::PLAYER_X) ? CellState::X : CellState::O;
-		if (m_board.set_CellState(_row, _col, state)) {
-			m_current_player = (m_current_player == Player::PLAYER_X) ? Player::PLAYER_O : Player::PLAYER_X;
-			return true;
-		}
-		return false;
+	void GameState::make_move(const std::pair<uint16_t, uint16_t>& _cell) {
+		if (m_user.make_move(m_board, _cell, m_vsBot) and m_vsBot) 
+			m_bot.make_move(m_board);
 	}
-	bool GameState::is_win(Player _player) {
-		CellState state = (_player == Player::PLAYER_X) ? CellState::X : CellState::O;
+	bool GameState::is_win(PlayerMark _player) {
+		CellState state = (_player == PlayerMark::PLAYER_X) ? CellState::X : CellState::O;
 		return check_win_for(state);
 	}
 	bool GameState::is_draw() {
-		return m_board.is_full() && !is_win(Player::PLAYER_X) && !is_win(Player::PLAYER_O);
+		return m_board.is_full() && !is_win(m_user.get_status()) && !is_win(m_bot.get_status());
 	}
 
 	const Board& GameState::get_board() const {
@@ -29,9 +25,9 @@ namespace EngineCore {
 		winInfo info;
 		// Check rows
 		for (int i = 0; i < 3; ++i) {
-			if (m_board.get_CellState(i, 0) != CellState::EMPTY &&
-				m_board.get_CellState(i, 0) == m_board.get_CellState(i, 1) &&
-				m_board.get_CellState(i, 1) == m_board.get_CellState(i, 2)) {
+			if (m_board.get_CellState({ i, 0 }) != CellState::EMPTY &&
+				m_board.get_CellState({ i, 0 }) == m_board.get_CellState({ i, 1 }) &&
+				m_board.get_CellState({ i, 1 }) == m_board.get_CellState({ i, 2 })) {
 				info.isWin = true;
 				info.row = -1;
 				info.col = i;
@@ -41,9 +37,9 @@ namespace EngineCore {
 		}
 		// Check columns
 		for (int i = 0; i < 3; ++i) {
-			if (m_board.get_CellState(0, i) != CellState::EMPTY &&
-				m_board.get_CellState(0, i) == m_board.get_CellState(1, i) &&
-				m_board.get_CellState(1, i) == m_board.get_CellState(2, i)) {
+			if (m_board.get_CellState({ 0, i }) != CellState::EMPTY &&
+				m_board.get_CellState({ 0, i }) == m_board.get_CellState({ 1, i }) &&
+				m_board.get_CellState({ 1, i }) == m_board.get_CellState({ 2, i })) {
 				info.isWin = true;
 				info.row = i;
 				info.col = -1;
@@ -52,9 +48,9 @@ namespace EngineCore {
 			}
 		}
 		// Check diagonals
-		if (m_board.get_CellState(0, 0) != CellState::EMPTY &&
-			m_board.get_CellState(0, 0) == m_board.get_CellState(1, 1) &&
-			m_board.get_CellState(1, 1) == m_board.get_CellState(2, 2)) {
+		if (m_board.get_CellState({ 0, 0 }) != CellState::EMPTY &&
+			m_board.get_CellState({ 0, 0 }) == m_board.get_CellState({ 1, 1 }) &&
+			m_board.get_CellState({ 1, 1 }) == m_board.get_CellState({ 2, 2 })) {
 			info.isWin = true;
 			info.row = -1;
 			info.col = -1;
@@ -62,9 +58,9 @@ namespace EngineCore {
 			info.isAntiDiagonal = false;
 			return info;
 		}
-		if (m_board.get_CellState(0, 2) != CellState::EMPTY &&
-			m_board.get_CellState(0, 2) == m_board.get_CellState(1, 1) &&
-			m_board.get_CellState(1, 1) == m_board.get_CellState(2, 0)) {
+		if (m_board.get_CellState({ 0, 2 }) != CellState::EMPTY &&
+			m_board.get_CellState({ 0, 2 }) == m_board.get_CellState({ 1, 1 }) &&
+			m_board.get_CellState({ 1, 1 }) == m_board.get_CellState({ 2, 0 })) {
 			info.isWin = true;
 			info.row = -1;
 			info.col = -1;
@@ -90,20 +86,19 @@ namespace EngineCore {
 
 	void GameState::reset() {
 		m_board.reset();
-		m_current_player = Player::PLAYER_X;
 	}
 
 	bool GameState::check_win_for(CellState _state) const {
 		// Check rows and columns
 		for (int i = 0; i < 3; ++i) {
-			if ((m_board.get_CellState(i, 0) == _state && m_board.get_CellState(i, 1) == _state && m_board.get_CellState(i, 2) == _state) ||
-				(m_board.get_CellState(0, i) == _state && m_board.get_CellState(1, i) == _state && m_board.get_CellState(2, i) == _state)) {
+			if ((m_board.get_CellState({ i, 0 }) == _state && m_board.get_CellState({ i, 1 }) == _state && m_board.get_CellState({ i, 2 }) == _state) ||
+				(m_board.get_CellState({ 0, i }) == _state && m_board.get_CellState({ 1, i }) == _state && m_board.get_CellState({ 2, i }) == _state)) {
 				return true;
 			}
 		}
 		// Check diagonals
-		if ((m_board.get_CellState(0, 0) == _state && m_board.get_CellState(1, 1) == _state && m_board.get_CellState(2, 2) == _state) ||
-			(m_board.get_CellState(0, 2) == _state && m_board.get_CellState(1, 1) == _state && m_board.get_CellState(2, 0) == _state)) {
+		if ((m_board.get_CellState({ 0, 0 }) == _state && m_board.get_CellState({ 1, 1 }) == _state && m_board.get_CellState({ 2, 2 }) == _state) ||
+			(m_board.get_CellState({ 0, 2 }) == _state && m_board.get_CellState({ 1, 1 }) == _state && m_board.get_CellState({ 2, 0 }) == _state)) {
 			return true;
 		}
 		return false;
@@ -112,5 +107,10 @@ namespace EngineCore {
 	void GameState::reset_wins() {
 		m_crossWins = 0;
 		m_cicleWins = 0;
+	}
+
+	bool GameState::vs_bot() {
+		m_vsBot = (m_vsBot == false) ? true : false;
+		return m_vsBot;
 	}
 }
