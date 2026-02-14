@@ -86,6 +86,8 @@ namespace EngineCore {
 
 	void GameState::reset() {
 		m_board.reset();
+		m_user = User(PlayerMark::PLAYER_X);
+		m_bot = Bot(PlayerMark::PLAYER_O);
 	}
 
 	bool GameState::check_win_for(CellState _state) const {
