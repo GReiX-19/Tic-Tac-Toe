@@ -4,10 +4,6 @@
 #include "BoardView.h"
 #include <SFML/Graphics.hpp>
 
-namespace EngineCore {
-	class GameState;
-}
-
 class AssetsManager;
 
 namespace Renderer {
@@ -16,7 +12,8 @@ namespace Renderer {
 	class GameOverScreen : public IScreen {
 	public:
 
-		GameOverScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& state);
+		GameOverScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _gameState);
+
 		void handle_event(const sf::Event& _event) override;
 		void update(float _dt) override;
 		void draw(sf::RenderWindow& _window) override;

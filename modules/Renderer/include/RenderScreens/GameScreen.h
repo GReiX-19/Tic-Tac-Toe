@@ -2,7 +2,8 @@
 #include "IScreen.h"
 #include "TextRenderer.h"
 #include "BoardView.h"
-#include "AssetsManager.h"
+
+class AssetsManager;
 
 namespace Renderer {
 	class Renderer;
@@ -10,7 +11,7 @@ namespace Renderer {
 	class GameScreen : public IScreen {
 	public:
 
-		GameScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& state);
+		GameScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _gameState);
 
 		void handle_event(const sf::Event& _event) override;
 		void update(float _dt) override;

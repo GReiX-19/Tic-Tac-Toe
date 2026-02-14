@@ -3,11 +3,6 @@
 #include "TextRenderer.h"
 #include <SFML/Graphics/Sprite.hpp>
 
-namespace sf {
-	class Event;
-	class RenderWindow;
-}
-
 class AssetsManager;
 
 namespace Renderer {
