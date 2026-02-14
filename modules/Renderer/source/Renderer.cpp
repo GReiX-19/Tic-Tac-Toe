@@ -4,6 +4,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Image.hpp>
 #include "RenderScreens/MenuScreen.h"
+#include "RenderScreens/GameModeScreen.h"
 #include "RenderScreens/GameScreen.h"
 #include "RenderScreens/GameOverScreen.h"
 
@@ -48,6 +49,9 @@ namespace Renderer {
 		switch (_newState) {
 		case AppState::Menu:
 			m_currentScreen = std::make_unique<MenuScreen>(*this, m_assetsManager);
+			break;
+		case AppState::GameMode:
+			m_currentScreen = std::make_unique<GameModeScreen>(*this, m_assetsManager, m_gameState);
 			break;
 		case AppState::Game:
 			m_currentScreen = std::make_unique<GameScreen>(*this, m_assetsManager, m_gameState);
