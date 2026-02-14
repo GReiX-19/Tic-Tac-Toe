@@ -1,18 +1,21 @@
 #pragma once
 #include "IScreen.h"
 #include "TextRenderer.h"
-#include "BoardView.h"
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+
+namespace EngineCore {
+	class GameState;
+}
 
 class AssetsManager;
 
 namespace Renderer {
 	class Renderer;
 
-	class GameOverScreen : public IScreen {
+	class GameModeScreen : public IScreen {
 	public:
 
-		GameOverScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _gameState);
+		GameModeScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _gameState);
 
 		void handle_event(const sf::Event& _event) override;
 		void update(float _dt) override;
@@ -24,9 +27,6 @@ namespace Renderer {
 		EngineCore::GameState& m_gameState;
 		TextRenderer m_textRenderer;
 
-		BoardView m_boardView;
-
-		sf::Sprite m_restartButton;
-		sf::Sprite m_menuButton;
+		sf::Sprite m_vsBotButton;
 	};
 }

@@ -2,8 +2,8 @@
 #include "IScreen.h"
 #include "TextRenderer.h"
 #include "BoardView.h"
-#include "AssetsManager.h"
-#include <SFML/Graphics/Sprite.hpp>
+
+class AssetsManager;
 
 namespace Renderer {
 	class Renderer;
@@ -11,7 +11,7 @@ namespace Renderer {
 	class GameScreen : public IScreen {
 	public:
 
-		GameScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& state);
+		GameScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _gameState);
 
 		void handle_event(const sf::Event& _event) override;
 		void update(float _dt) override;
@@ -28,7 +28,5 @@ namespace Renderer {
 		sf::Vector2i m_mousePosition;
 		sf::Vector2i m_keyboardCursorPos;
 		bool m_isUsingKeyboard = false;
-
-		sf::Sprite m_vsBotButton;
 	};
 }

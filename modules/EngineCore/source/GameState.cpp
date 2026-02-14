@@ -86,6 +86,8 @@ namespace EngineCore {
 
 	void GameState::reset() {
 		m_board.reset();
+		m_user = User(PlayerMark::PLAYER_X);
+		m_bot = Bot(PlayerMark::PLAYER_O);
 	}
 
 	bool GameState::check_win_for(CellState _state) const {
@@ -109,8 +111,11 @@ namespace EngineCore {
 		m_cicleWins = 0;
 	}
 
-	bool GameState::vs_bot() {
-		m_vsBot = (m_vsBot == false) ? true : false;
+	void GameState::change_vsBot() {
+		m_vsBot = (m_vsBot == true) ? false : true;
+	}
+
+	bool GameState::is_vsBot() {
 		return m_vsBot;
 	}
 }
