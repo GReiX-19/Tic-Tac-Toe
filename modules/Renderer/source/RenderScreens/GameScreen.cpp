@@ -2,6 +2,7 @@
 #include "Renderer.h"
 #include "AppState.h"
 #include "GameState.h"
+#include <SFML/Graphics/Sprite.hpp>
 
 namespace Renderer {
 	GameScreen::GameScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _state)
@@ -9,11 +10,7 @@ namespace Renderer {
 		, m_assetsManager(_assetsManager)
 		, m_gameState(_state)
 		, m_textRenderer(_assetsManager)
-		, m_boardView(m_gameState, _assetsManager) 
-		, m_vsBotButton(_assetsManager.get_texture("vsBotButton")) {
-		m_vsBotButton.setOrigin(m_vsBotButton.getGlobalBounds().getCenter());
-		m_vsBotButton.setScale({ 0.4f, 0.4f });
-		m_vsBotButton.setPosition({ 550.f, 630.f });
+		, m_boardView(m_gameState, _assetsManager) {
 	}
 
 	void GameScreen::handle_event(const sf::Event& _event) {
@@ -63,12 +60,6 @@ namespace Renderer {
 				if (gridPos.y <= 2)
 					m_gameState.make_move({ gridPos.x, gridPos.y });
 			}
-			// Click effect for bot button and switching to gamemode with bot
-			if (m_vsBotButton.getGlobalBounds().contains(sf::Vector2f(mouse->position))) {
-				if (m_gameState.vs_bot())
-					m_vsBotButton.setTexture(m_assetsManager.get_texture("vsBotButtonHovered"));
-				else m_vsBotButton.setTexture(m_assetsManager.get_texture("vsBotButton"));
-			}
 		}
 	}
 
@@ -102,7 +93,6 @@ namespace Renderer {
 
 		_window.draw(crossWins);
 		_window.draw(circleWins);
-		_window.draw(m_vsBotButton);
 
 		m_textRenderer.draw_text(_window, std::to_string(m_gameState.get_crossWins()), 30, sf::Color::White, (_window.getSize().x / 2) - 50.f, 670.f);
 		m_textRenderer.draw_text(_window, std::to_string(m_gameState.get_circleWins()), 30, sf::Color::White, (_window.getSize().x / 2) + 50.f, 670.f);
