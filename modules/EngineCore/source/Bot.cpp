@@ -94,17 +94,6 @@ namespace EngineCore {
 			(_board.get_CellState({ 0, 2 }) == _state && _board.get_CellState({ 1, 1 }) == _state && _board.get_CellState({ 2, 0 }) == _state)) {
 			return true;
 		}
-		//главная диагональ
-		if (_board.get_CellState(0, 0) == _state
-			and _board.get_CellState(1, 1) == _state
-			and _board.get_CellState(2, 2) == _state)
-			return true;
-		//побочная диагональ
-		if (_board.get_CellState(0, 2) == _state
-			and _board.get_CellState(1, 1) == _state
-			and _board.get_CellState(2, 0) == _state)
-			return true;
-
 		return false;
 	}
 }
