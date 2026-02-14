@@ -4,12 +4,12 @@
 #include "AssetsManager.h"
 
 namespace Renderer {
-	GameOverScreen::GameOverScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _state)
+	GameOverScreen::GameOverScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _gameState)
 		: m_renderer(_renderer)
 		, m_assetsManager(_assetsManager)
-		, m_gameState(_state)
+		, m_gameState(_gameState)
 		, m_textRenderer(_assetsManager)
-		, m_boardView(_state, _assetsManager) 
+		, m_boardView(_gameState, _assetsManager)
 		, m_restartButton(_assetsManager.get_texture("restartButton"))
 		, m_menuButton(_assetsManager.get_texture("menuButton")) {
 		m_restartButton.setOrigin(m_restartButton.getGlobalBounds().getCenter());

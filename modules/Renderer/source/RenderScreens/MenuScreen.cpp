@@ -44,7 +44,7 @@ namespace Renderer {
 			if (mousePos->button == sf::Mouse::Button::Left) {
 				// Switch to game state if play button is clicked
 				if (m_playButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position))) {
-					m_renderer.switch_state(AppState::Game);
+					m_renderer.switch_state(AppState::GameMode);
 				}
 				// Exit application if exit button is clicked
 				if (m_exitButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position))) {
@@ -55,7 +55,7 @@ namespace Renderer {
 
 		if (const auto* key = _event.getIf<sf::Event::KeyPressed>()) {
 			if (key->scancode == sf::Keyboard::Scan::Enter) {
-				m_renderer.switch_state(AppState::Game);
+				m_renderer.switch_state(AppState::GameMode);
 			}
 			if (key->scancode == sf::Keyboard::Scan::Escape) {
 				m_renderer.switch_state(AppState::Exit);

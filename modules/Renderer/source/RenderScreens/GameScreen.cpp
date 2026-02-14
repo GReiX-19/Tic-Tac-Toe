@@ -1,14 +1,14 @@
 #include "RenderScreens/GameScreen.h"
 #include "Renderer.h"
-#include "AppState.h"
 #include "GameState.h"
+#include "AssetsManager.h"
 #include <SFML/Graphics/Sprite.hpp>
 
 namespace Renderer {
-	GameScreen::GameScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _state)
+	GameScreen::GameScreen(Renderer& _renderer, AssetsManager& _assetsManager, EngineCore::GameState& _gameState)
 		: m_renderer(_renderer)
 		, m_assetsManager(_assetsManager)
-		, m_gameState(_state)
+		, m_gameState(_gameState)
 		, m_textRenderer(_assetsManager)
 		, m_boardView(m_gameState, _assetsManager) {
 	}
