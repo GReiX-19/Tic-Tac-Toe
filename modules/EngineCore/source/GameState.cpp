@@ -111,8 +111,11 @@ namespace EngineCore {
 		m_cicleWins = 0;
 	}
 
-	bool GameState::vs_bot() {
-		m_vsBot = (m_vsBot == false) ? true : false;
+	void GameState::change_vsBot() {
+		m_vsBot = (m_vsBot == true) ? false : true;
+	}
+
+	bool GameState::is_vsBot() {
 		return m_vsBot;
 	}
 }
