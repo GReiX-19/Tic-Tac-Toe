@@ -13,9 +13,9 @@ namespace Renderer {
 		, m_restartButton(_assetsManager.get_texture("restartButton"))
 		, m_menuButton(_assetsManager.get_texture("menuButton")) {
 		m_restartButton.setOrigin(m_restartButton.getGlobalBounds().getCenter());
-		m_restartButton.setPosition({ 200.f, 350.f });
+		m_restartButton.setPosition({ 200.f, 400.f });
 		m_menuButton.setOrigin(m_menuButton.getGlobalBounds().getCenter());
-		m_menuButton.setPosition({ 400.f, 350.f });
+		m_menuButton.setPosition({ 400.f, 400.f });
 	}
 
 	void GameOverScreen::handle_event(const sf::Event& _event) {
