@@ -41,7 +41,7 @@ namespace Renderer {
 
 		sf::RectangleShape line;
 		line.setFillColor(sf::Color::Red);
-		line.setSize({ 1000.f, 10.f });
+		line.setSize({ 600.f, 10.f });
 		line.setOrigin({ 0.f, 5.f });
 
 		if (info.row != -1) {
@@ -52,11 +52,12 @@ namespace Renderer {
 			line.setPosition({ info.col * m_cellSize + m_cellSize / 2.f, 0.f });
 		}
 		else if (info.isDiagonal) {
+			line.setSize({ 900.f, 10.f });
 			line.setPosition({ 0.f, 0.f });
 			line.setRotation(sf::degrees(45.f));
 		}
 		else if (info.isAntiDiagonal) {
-			line.setPosition({ 600.f, 0.f });
+			line.setPosition({ 900.f, 0.f });
 			line.setRotation(sf::degrees(135.f));
 		}
 
