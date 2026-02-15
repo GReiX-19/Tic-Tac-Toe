@@ -14,12 +14,6 @@ namespace Renderer {
 	}
 
 	void GameScreen::handle_event(const sf::Event& _event) {
-		if (const auto* key = _event.getIf<sf::Event::KeyPressed>()) {
-			if (key->scancode == sf::Keyboard::Scan::Escape) {
-				m_renderer.switch_state(AppState::Menu);
-			}
-		}
-
 		if (const auto* mouseMove = _event.getIf<sf::Event::MouseMoved>()) {
 			m_isUsingKeyboard = false;
 			m_mousePosition = { mouseMove->position.x, mouseMove->position.y };
@@ -59,6 +53,14 @@ namespace Renderer {
 				const sf::Vector2i gridPos = { m_mousePosition.x / 200, m_mousePosition.y / 200 };
 				if (gridPos.y <= 2)
 					m_gameState.make_move({ gridPos.x, gridPos.y });
+			}
+		}
+
+		if (const auto* key = _event.getIf<sf::Event::KeyPressed>()) {
+			if (key->scancode == sf::Keyboard::Scan::Escape) {
+				m_gameState.reset();
+				m_gameState.reset_wins();
+				m_renderer.switch_state(AppState::Menu);
 			}
 		}
 	}
