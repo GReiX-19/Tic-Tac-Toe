@@ -57,7 +57,8 @@ namespace Renderer {
 			line.setRotation(sf::degrees(45.f));
 		}
 		else if (info.isAntiDiagonal) {
-			line.setPosition({ 900.f, 0.f });
+			line.setSize({ 900.f, 10.f });
+			line.setPosition({ 600.f, 0.f });
 			line.setRotation(sf::degrees(135.f));
 		}
 
