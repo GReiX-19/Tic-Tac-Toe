@@ -22,8 +22,5 @@ namespace EngineCore {
 
 		bool check_win(const Board& _board, CellState _state);
 
-	private:
-		CellState m_botState;
-		CellState m_playerState;
 	};
 }
