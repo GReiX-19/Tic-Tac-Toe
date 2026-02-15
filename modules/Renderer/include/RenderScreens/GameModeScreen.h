@@ -28,5 +28,6 @@ namespace Renderer {
 		TextRenderer m_textRenderer;
 
 		sf::Sprite m_vsBotButton;
+		sf::Sprite m_enterBattleButton;
 	};
 }

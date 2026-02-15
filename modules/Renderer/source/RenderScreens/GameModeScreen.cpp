@@ -9,10 +9,15 @@ namespace Renderer {
 		, m_assetsManager(_assetsManager)
 		, m_gameState(_gameState)
 		, m_textRenderer(_assetsManager)
-		, m_vsBotButton((m_gameState.is_vsBot() == false) ? _assetsManager.get_texture("vsBotButton") : _assetsManager.get_texture("vsBotButtonMarked")) {
+		, m_vsBotButton((m_gameState.is_vsBot() == false) ? _assetsManager.get_texture("vsBotButton") : _assetsManager.get_texture("vsBotButtonMarked"))
+		, m_enterBattleButton(_assetsManager.get_texture("playButton")) {
 		m_vsBotButton.setOrigin(m_vsBotButton.getGlobalBounds().getCenter());
 		m_vsBotButton.setScale({ 0.4f, 0.4f });
 		m_vsBotButton.setPosition({ 400.f, 350.f });
+
+		m_enterBattleButton.setOrigin(m_enterBattleButton.getGlobalBounds().getCenter());
+		m_enterBattleButton.setScale({ 0.8f, 0.8f });
+		m_enterBattleButton.setPosition({ 300.f, 500.f });
 	}
 	
 	void GameModeScreen::handle_event(const sf::Event& _event) {
@@ -29,6 +34,11 @@ namespace Renderer {
 				else
 					m_vsBotButton.setTexture(m_assetsManager.get_texture("vsBotButton"));
 			}
+
+			if (m_enterBattleButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position)))
+				m_enterBattleButton.setTexture(m_assetsManager.get_texture("playButtonHovered"));
+			else 
+				m_enterBattleButton.setTexture(m_assetsManager.get_texture("playButton"));
 		}
 
 		if (const auto* mousePos = _event.getIf<sf::Event::MouseButtonPressed>()) {
@@ -44,6 +54,16 @@ namespace Renderer {
 						m_vsBotButton.setTexture(m_assetsManager.get_texture("vsBotButtonMarked"));
 						m_gameState.change_vsBot();
 					}
+				}
+
+				if (m_enterBattleButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position)))
+					m_enterBattleButton.setTexture(m_assetsManager.get_texture("playButton"));
+			}
+		}
+		else if (const auto* mousePos = _event.getIf<sf::Event::MouseButtonReleased>()) {
+			if (mousePos->button == sf::Mouse::Button::Left) {
+				if (m_enterBattleButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position))) {
+					m_renderer.switch_state(AppState::Game);
 				}
 			}
 		}
@@ -65,5 +85,6 @@ namespace Renderer {
 	void GameModeScreen::draw(sf::RenderWindow& _window) {
 		m_textRenderer.draw_text(_window, "Change vs Bot:", 40, sf::Color::White, (_window.getSize().x / 2.f) - 60.f, m_vsBotButton.getPosition().y );
 		_window.draw(m_vsBotButton);
+		_window.draw(m_enterBattleButton);
 	}
 }
