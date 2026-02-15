@@ -13,7 +13,7 @@ namespace Renderer {
 		, m_enterBattleButton(_assetsManager.get_texture("playButton")) {
 		m_vsBotButton.setOrigin(m_vsBotButton.getGlobalBounds().getCenter());
 		m_vsBotButton.setScale({ 0.4f, 0.4f });
-		m_vsBotButton.setPosition({ 400.f, 350.f });
+		m_vsBotButton.setPosition({ 430.f, 200.f });
 
 		m_enterBattleButton.setOrigin(m_enterBattleButton.getGlobalBounds().getCenter());
 		m_enterBattleButton.setScale({ 0.8f, 0.8f });
@@ -83,7 +83,7 @@ namespace Renderer {
 	}
 
 	void GameModeScreen::draw(sf::RenderWindow& _window) {
-		m_textRenderer.draw_text(_window, "Change vs Bot:", 40, sf::Color::White, (_window.getSize().x / 2.f) - 60.f, m_vsBotButton.getPosition().y );
+		m_textRenderer.draw_text(_window, "Change vs Bot:", 40, sf::Color::White, (_window.getSize().x / 2.f) - 50.f, m_vsBotButton.getPosition().y );
 		_window.draw(m_vsBotButton);
 		_window.draw(m_enterBattleButton);
 	}
