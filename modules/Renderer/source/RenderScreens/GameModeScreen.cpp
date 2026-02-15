@@ -34,30 +34,19 @@ namespace Renderer {
 		if (const auto* mousePos = _event.getIf<sf::Event::MouseButtonPressed>()) {
 			if (mousePos->button == sf::Mouse::Button::Left) {
 				if (m_gameState.is_vsBot()) {
-					if (m_vsBotButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position)))
+					if (m_vsBotButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position))) {
 						m_vsBotButton.setTexture(m_assetsManager.get_texture("vsBotButton"));
-					m_gameState.change_vsBot();
+						m_gameState.change_vsBot();
+					}
 				}
 				else {
-					if (m_vsBotButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position)))
+					if (m_vsBotButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position))) {
 						m_vsBotButton.setTexture(m_assetsManager.get_texture("vsBotButtonMarked"));
-					m_gameState.change_vsBot();
+						m_gameState.change_vsBot();
+					}
 				}
 			}
 		}
-		/*else if (const auto* mousePos = _event.getIf<sf::Event::MouseButtonReleased>()) {
-			if (mousePos->button == sf::Mouse::Button::Left) {
-				if (m_gameState.is_vsBot()) {
-					if (m_vsBotButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position)))
-						m_vsBotButton.setTexture(m_assetsManager.get_texture("vsBotButtonMarked"));
-					m_gameState.change_vsBot();
-				}
-				else {
-					if (m_vsBotButton.getGlobalBounds().contains(sf::Vector2f(mousePos->position)))
-						m_vsBotButton.setTexture(m_assetsManager.get_texture("vsBotButton"));
-				}
-			}
-		}*/
 
 		if (const auto* key = _event.getIf<sf::Event::KeyPressed>()) {
 			if (key->scancode == sf::Keyboard::Scan::Enter) {
