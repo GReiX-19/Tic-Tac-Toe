@@ -115,7 +115,7 @@ namespace EngineCore {
 		m_vsBot = (m_vsBot == true) ? false : true;
 	}
 
-	bool GameState::is_vsBot() {
+	bool GameState::is_vsBot() const {
 		return m_vsBot;
 	}
 }

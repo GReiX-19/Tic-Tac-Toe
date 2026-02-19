@@ -28,7 +28,7 @@ namespace EngineCore {
 		void reset_wins();
 
 		void change_vsBot();
-		bool is_vsBot();
+		bool is_vsBot() const;
 
 	private:
 

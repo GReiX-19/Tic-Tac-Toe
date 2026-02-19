@@ -9,8 +9,12 @@ namespace EngineCore {
 	bool User::make_move(Board& _board, const std::pair<uint16_t, uint16_t>& _cell, const bool& _isVsBot) {
 		CellState state = (get_status() == PlayerMark::PLAYER_X) ? CellState::X : CellState::O;
 		if (!_isVsBot)
-			m_playerStatus = get_status() == PlayerMark::PLAYER_X ? PlayerMark::PLAYER_O : PlayerMark::PLAYER_X;
-		return _board.set_CellState(_cell, state);
+			if (_board.set_CellState(_cell, state))
+			{
+				m_playerStatus = get_status() == PlayerMark::PLAYER_X ? PlayerMark::PLAYER_O : PlayerMark::PLAYER_X;
+				return true;
+			}
+		return false;
 	}
 
 	PlayerMark User::get_status() const {
