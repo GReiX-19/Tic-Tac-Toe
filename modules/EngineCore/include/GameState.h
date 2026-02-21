@@ -11,7 +11,7 @@ namespace EngineCore {
 		
 		GameState();
 
-		void make_move(const std::pair<uint16_t, uint16_t>& _cell);
+		bool make_move(const std::pair<uint16_t, uint16_t>& _cell);
 		bool is_win(PlayerMark _player);
 		bool is_draw();
 

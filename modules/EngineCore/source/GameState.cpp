@@ -6,9 +6,38 @@ namespace EngineCore {
 		: m_board(), m_user(PlayerMark::PLAYER_X), m_bot(PlayerMark::PLAYER_O), m_vsBot(false), m_crossWins(0), m_cicleWins(0) {
 	}
 
-	void GameState::make_move(const std::pair<uint16_t, uint16_t>& _cell) {
-		if (m_user.make_move(m_board, _cell, m_vsBot) and m_vsBot) 
-			m_bot.make_move(m_board);
+	bool GameState::make_move(const std::pair<uint16_t, uint16_t>& _cell) {
+		if (m_vsBot) {
+			if (m_user.make_move(m_board, _cell, m_vsBot)) {
+				if (is_win(m_user.get_status())) {
+					add_crossWin();
+					return true;
+				}
+
+				m_bot.make_move(m_board);
+				if (is_win(m_bot.get_status())) {
+					add_circleWin();
+					return true;
+				}
+			}
+		}
+		else {
+			m_user.make_move(m_board, _cell, m_vsBot);
+			if (is_win(m_user.get_status())) {
+				switch (m_user.get_status()) {
+				case PlayerMark::PLAYER_X: add_crossWin(); break;
+				case PlayerMark::PLAYER_O: add_circleWin(); break;
+				default: break;
+				}
+				return true;
+			}
+			m_user.change_status();
+		}
+
+		if (is_draw())
+			return true;
+
+		return false;
 	}
 	bool GameState::is_win(PlayerMark _player) {
 		CellState state = (_player == PlayerMark::PLAYER_X) ? CellState::X : CellState::O;
